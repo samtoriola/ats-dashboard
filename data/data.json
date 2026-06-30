@@ -765,13 +765,31 @@
       "assignee": "Todd Oldham",
       "priority": "Low",
       "start": "",
-      "due": "",
+      "due": "2026-12-31",
       "created": "2026-06-30",
       "updated": "2026-06-30",
       "reporter": "Todd Oldham",
       "url": "https://stradaeducation.atlassian.net/browse/APR-58",
       "subtasks": [],
       "desc": "Indiana has launched a State Office of Education and Employment (SOEE) within the Indiana Economic Development Corporation (IEDC). Strada will support the office's establishment by assisting with organizational design, analytical capabilities, and data operations. As part of this effort, Indiana is expected to undertake a graduate outcomes demonstration project in 2026, building on approaches curr"
+    },
+    {
+      "key": "APR-59",
+      "type": "Task",
+      "summary": "Western North Carolina",
+      "status": "Prospect",
+      "parent": "",
+      "parentKey": "",
+      "assignee": "Todd Oldham",
+      "priority": "Low",
+      "start": "",
+      "due": "",
+      "created": "2026-06-30",
+      "updated": "2026-06-30",
+      "reporter": "Sam Toriola",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-59",
+      "subtasks": [],
+      "desc": ""
     }
   ],
   "wsConfig": [
@@ -806,6 +824,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-06-30T15:24:03.925269+00:00",
+  "fetchedAt": "2026-06-30T17:22:14.557711+00:00",
   "projectKey": "APR"
 }
