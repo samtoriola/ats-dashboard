@@ -44,8 +44,6 @@
   .header-badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; background: var(--blue-bg); color: var(--blue); }
   .header-link { font-size: 12px; padding: 6px 12px; border: 1px solid var(--border2); border-radius: var(--radius-sm); background: white; color: var(--text2); cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 5px; transition: all 0.15s; }
   .header-link:hover { background: var(--surface2); color: var(--text); }
-  .import-btn { font-size: 12px; padding: 6px 14px; border: 1.5px solid var(--blue-mid); border-radius: var(--radius-sm); background: white; color: var(--blue-mid); cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 5px; transition: all 0.15s; }
-  .import-btn:hover { background: var(--blue-bg); }
   .export-btn { font-size: 12px; padding: 6px 14px; border: none; border-radius: var(--radius-sm); background: var(--blue-mid); color: white; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 5px; transition: background 0.15s; }
   .export-btn:hover { background: var(--blue); }
 
@@ -279,10 +277,6 @@
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Open in Jira
     </a>
-    <button class="import-btn" onclick="openImport()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Import Jira
-    </button>
     <button class="export-btn" onclick="exportCSV()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       <span>Export CSV</span>
@@ -356,6 +350,7 @@
     <button class="tab" onclick="switchTab('issues', this)">Issues</button>
     <button class="tab" onclick="switchTab('timeline', this)">Timeline</button>
     <button class="tab" onclick="switchTab('team', this)">Team</button>
+    <button class="tab" onclick="switchTab('report', this)">Report</button>
   </div>
 
   <!-- OVERVIEW VIEW -->
@@ -482,67 +477,96 @@
     </div>
   </div>
 
-</main>
-
-<!-- IMPORT MODAL -->
-<div class="modal-overlay" id="import-overlay" onclick="if(event.target===this)closeImport()">
-  <div class="modal" id="import-modal" style="width:520px;">
-    <div class="modal-header">
-      <div>
-        <div class="modal-key" style="color:var(--blue-mid);">Import Jira Export</div>
-        <div class="modal-title" style="font-size:15px;">Refresh dashboard data</div>
+  <!-- REPORT VIEW -->
+  <div id="view-report" class="view">
+    <div class="panel" style="margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="panel-title" style="margin-bottom:2px;">Progress Report</div>
+          <div style="font-size:11px;color:var(--text3);">Generate a shareable summary for Todd, Jackson, and the team</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <select class="filter-select" id="report-scope" style="font-size:11px;">
+            <option value="all">All Workstreams</option>
+            <option value="State/Regional EEO Initiatives">State/Regional EEO Initiatives</option>
+            <option value="Dashboard Ecosystem">Dashboard Ecosystem</option>
+            <option value="Ad Hoc Workstream">Ad Hoc Workstream</option>
+            <option value="Data Infrastructure and Governance">Data Infrastructure and Governance</option>
+            <option value="ATS Project Management">ATS Project Management</option>
+          </select>
+          <select class="filter-select" id="report-window" style="font-size:11px;">
+            <option value="7">Activity in last 7 days</option>
+            <option value="14" selected>Activity in last 14 days</option>
+            <option value="30">Activity in last 30 days</option>
+          </select>
+          <button class="export-btn" onclick="generateReport()" style="gap:6px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            Generate Report
+          </button>
+        </div>
       </div>
-      <button class="modal-close" onclick="closeImport()">×</button>
     </div>
-    <div class="modal-body">
 
-      <!-- How-to steps -->
-      <div style="background:var(--blue-bg);border-radius:var(--radius);padding:13px 15px;margin-bottom:18px;">
-        <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">How to export from Jira</div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--blue);">
-            <span style="background:var(--blue-mid);color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;">1</span>
-            Open your Jira project board and go to <strong>Backlog</strong> or <strong>Issues</strong> view
+    <div id="report-empty" class="panel" style="text-align:center;padding:48px 20px;color:var(--text3);">
+      <div style="font-size:32px;margin-bottom:10px;">📋</div>
+      <div style="font-size:13px;">Click "Generate Report" to build a progress summary from current Jira data.</div>
+    </div>
+
+    <div id="report-output" style="display:none;">
+      <div class="panel" style="margin-bottom:18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:4px;">
+          <div id="report-title" style="font-size:15px;font-weight:600;color:var(--text);"></div>
+          <div style="display:flex;gap:8px;">
+            <button class="header-link" onclick="copyReportToClipboard()" id="report-copy-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy for Slack/Email
+            </button>
+            <button class="header-link" onclick="window.print()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Print / Save PDF
+            </button>
           </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--blue);">
-            <span style="background:var(--blue-mid);color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;">2</span>
-            Click <strong>Export</strong> → <strong>Export Excel (HTML)</strong> or <strong>Export HTML</strong>
-          </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--blue);">
-            <span style="background:var(--blue-mid);color:white;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px;">3</span>
-            Save the <strong>.html</strong> file and drop it below
-          </div>
+        </div>
+        <div id="report-meta" style="font-size:11px;color:var(--text3);"></div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-title">Summary</div>
+          <div id="report-summary-cards" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Workstream Progress</div>
+          <div id="report-ws-progress"></div>
         </div>
       </div>
 
-      <!-- Drop zone -->
-      <div id="drop-zone"
-        style="border:2px dashed var(--border2);border-radius:var(--radius-lg);padding:36px 24px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--surface2);"
-        onclick="document.getElementById('file-input').click()"
-        ondragover="handleDragOver(event)"
-        ondragleave="handleDragLeave(event)"
-        ondrop="handleDrop(event)">
-        <div id="drop-icon" style="margin-bottom:10px;">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" style="margin:0 auto;display:block;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
-        </div>
-        <div id="drop-label" style="font-size:13px;font-weight:500;color:var(--text2);margin-bottom:4px;">Drop your Jira HTML export here</div>
-        <div style="font-size:11px;color:var(--text3);">or click to browse · .html files only</div>
-        <input type="file" id="file-input" accept=".html,.htm" style="display:none;" onchange="handleFileSelect(event)">
+      <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title" style="color:var(--green);">✓ Completed Recently</div>
+        <div id="report-completed"></div>
       </div>
 
-      <!-- Preview / result -->
-      <div id="import-preview" style="display:none;margin-top:16px;"></div>
-
-      <!-- Actions -->
-      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px;">
-        <button onclick="closeImport()" style="font-size:13px;padding:8px 18px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:white;color:var(--text2);cursor:pointer;">Cancel</button>
-        <button id="import-confirm-btn" onclick="confirmImport()" style="font-size:13px;padding:8px 20px;border:none;border-radius:var(--radius-sm);background:var(--blue-mid);color:white;cursor:pointer;font-weight:600;display:none;">
-          Update Dashboard
-        </button>
+      <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title" style="color:var(--blue);">→ In Progress</div>
+        <div id="report-inprogress"></div>
       </div>
+
+      <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title" style="color:var(--red);">⚠ Overdue / Needs Attention</div>
+        <div id="report-overdue"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">By Owner</div>
+        <div id="report-by-owner"></div>
+      </div>
+
+      <!-- Plain-text version used for clipboard copy, kept off-screen -->
+      <textarea id="report-plaintext" style="position:absolute;left:-9999px;top:-9999px;" readonly></textarea>
     </div>
   </div>
-</div>
+
+</main>
 
 <!-- TOAST -->
 <div id="toast" style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--text);color:white;padding:10px 20px;border-radius:30px;font-size:13px;font-weight:500;opacity:0;transition:all 0.3s;z-index:9999;white-space:nowrap;pointer-events:none;"></div>
@@ -1243,6 +1267,9 @@ function switchTab(name, btn) {
   document.getElementById('view-'+name).classList.add('active');
   if (name==='timeline') renderGantt();
   if (name==='team') renderTeam();
+  if (name==='report' && !document.getElementById('report-output').dataset.generated) {
+    // leave empty state visible until user clicks Generate
+  }
 }
 
 function switchTabByName(name) {
@@ -1250,6 +1277,181 @@ function switchTabByName(name) {
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
 }
+
+// ---- REPORT ----
+function generateReport() {
+  const scopeWS = document.getElementById('report-scope').value;
+  const windowDays = parseInt(document.getElementById('report-window').value, 10);
+
+  const windowStart = new Date(TODAY);
+  windowStart.setDate(windowStart.getDate() - windowDays);
+
+  let scoped = ISSUES.filter(i => i.type !== 'Workstream');
+  if (scopeWS) scoped = scoped.filter(i => getWSForIssue(i) === scopeWS);
+
+  const done = scoped.filter(i => i.status === 'Done');
+  const inDev = scoped.filter(i => i.status === 'In Development');
+  const planning = scoped.filter(i => i.status === 'Planning');
+  const prospect = scoped.filter(i => i.status === 'Prospect');
+  const overdue = scoped.filter(i => { const d = parseDue(i.due); return d && d < TODAY && i.status !== 'Done'; });
+  const dueSoon = scoped.filter(i => { const d = parseDue(i.due); return d && d >= TODAY && (d-TODAY)/86400000 <= 14 && i.status !== 'Done'; });
+
+  const completedRecently = done.filter(i => {
+    const u = parseDue(i.updated);
+    return u && u >= windowStart;
+  }).sort((a,b)=> new Date(b.updated) - new Date(a.updated));
+
+  const pct = scoped.length ? Math.round(done.length/scoped.length*100) : 0;
+
+  document.getElementById('report-empty').style.display = 'none';
+  document.getElementById('report-output').style.display = 'block';
+  document.getElementById('report-output').dataset.generated = 'true';
+
+  const scopeLabel = scopeWS || 'All Workstreams';
+  document.getElementById('report-title').textContent = `ATS Project Register — Progress Report: ${scopeLabel}`;
+  document.getElementById('report-meta').textContent =
+    `Generated ${TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})} · Covering activity in the last ${windowDays} days · Source: Jira project APR`;
+
+  // Summary cards
+  document.getElementById('report-summary-cards').innerHTML = `
+    <div style="background:var(--surface2);border-radius:8px;padding:12px;">
+      <div style="font-size:22px;font-weight:700;color:var(--text);">${scoped.length}</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Total Issues</div>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:12px;">
+      <div style="font-size:22px;font-weight:700;color:var(--green);">${pct}%</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Complete</div>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:12px;">
+      <div style="font-size:22px;font-weight:700;color:var(--blue);">${inDev.length}</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">In Development</div>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:12px;">
+      <div style="font-size:22px;font-weight:700;color:${overdue.length?'var(--red)':'var(--green)'};">${overdue.length}</div>
+      <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Overdue</div>
+    </div>
+  `;
+
+  // Workstream progress (mini bars)
+  const wsScope = scopeWS ? WS_CONFIG.filter(w=>w.name===scopeWS) : WS_CONFIG;
+  document.getElementById('report-ws-progress').innerHTML = wsScope.map(ws => {
+    const wsTasks = scoped.filter(i => getWSForIssue(i) === ws.name);
+    const wsDone = wsTasks.filter(i=>i.status==='Done').length;
+    const wsPct = wsTasks.length ? Math.round(wsDone/wsTasks.length*100) : 0;
+    return `<div style="padding:8px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+        <span style="font-weight:500;">${ws.name}</span><span style="color:var(--text3);">${wsDone}/${wsTasks.length} · ${wsPct}%</span>
+      </div>
+      <div class="progress-bg"><div class="progress-fill" style="width:${wsPct}%;background:${ws.color};"></div></div>
+    </div>`;
+  }).join('') || '<div style="font-size:12px;color:var(--text3);">No workstreams in scope.</div>';
+
+  // Completed recently
+  document.getElementById('report-completed').innerHTML = completedRecently.length
+    ? completedRecently.map(i => reportRow(i, formatDate(i.updated))).join('')
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">Nothing marked Done in the last ${windowDays} days.</div>`;
+
+  // In progress
+  document.getElementById('report-inprogress').innerHTML = inDev.length
+    ? inDev.sort((a,b)=>(parseDue(a.due)||Infinity)-(parseDue(b.due)||Infinity)).map(i => reportRow(i, i.due?`Due ${formatDate(i.due)}`:'No due date')).join('')
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">Nothing currently in development.</div>`;
+
+  // Overdue / due soon
+  const attentionItems = [...overdue.map(i=>({...i, tag:'overdue'})), ...dueSoon.map(i=>({...i, tag:'soon'}))];
+  document.getElementById('report-overdue').innerHTML = attentionItems.length
+    ? attentionItems.sort((a,b)=>parseDue(a.due)-parseDue(b.due)).map(i => {
+        const label = i.tag === 'overdue' ? `Overdue since ${formatDate(i.due)}` : `Due ${formatDate(i.due)}`;
+        return reportRow(i, label, i.tag === 'overdue' ? 'due-overdue' : 'due-soon');
+      }).join('')
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">Nothing overdue or due within 14 days. ✓</div>`;
+
+  // By owner
+  const owners = ['Sam Toriola','Todd Oldham','Jackson Sauls','Unassigned'];
+  document.getElementById('report-by-owner').innerHTML = owners.map(o => {
+    const items = scoped.filter(i=>i.assignee===o);
+    if (!items.length) return '';
+    const oDone = items.filter(i=>i.status==='Done').length;
+    const oOverdue = items.filter(i=>{const d=parseDue(i.due);return d&&d<TODAY&&i.status!=='Done';}).length;
+    return `<div style="padding:10px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        ${avHtml(o,'sm')}<span style="font-weight:600;font-size:13px;">${o}</span>
+        <span style="font-size:11px;color:var(--text3);">${items.length} issues · ${oDone} done${oOverdue?` · ${oOverdue} overdue`:''}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  buildPlaintextReport({scopeLabel, windowDays, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope});
+}
+
+function reportRow(i, rightLabel, rightCls) {
+  return `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;" onclick="openModal('${i.key}')">
+    <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);min-width:56px;">${i.key}</span>
+    <span style="flex:1;font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${i.summary}</span>
+    ${avHtml(i.assignee,'sm')}
+    <span style="font-size:10px;color:var(--text3);min-width:60px;${rightCls?`color:var(--${rightCls==='due-overdue'?'red':'amber'});font-weight:600;`:''}">${rightLabel}</span>
+  </div>`;
+}
+
+function buildPlaintextReport({scopeLabel, windowDays, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope}) {
+  const lines = [];
+  lines.push(`ATS PROJECT REGISTER — PROGRESS REPORT`);
+  lines.push(`Scope: ${scopeLabel}`);
+  lines.push(`Generated: ${TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}`);
+  lines.push('');
+  lines.push(`SUMMARY`);
+  lines.push(`Total issues: ${scoped.length} | Complete: ${pct}% | In Development: ${inDev.length} | Overdue: ${overdue.length}`);
+  lines.push('');
+  lines.push(`WORKSTREAM PROGRESS`);
+  wsScope.forEach(ws => {
+    const wsTasks = scoped.filter(i => getWSForIssue(i) === ws.name);
+    const wsDone = wsTasks.filter(i=>i.status==='Done').length;
+    const wsPct = wsTasks.length ? Math.round(wsDone/wsTasks.length*100) : 0;
+    lines.push(`- ${ws.name}: ${wsDone}/${wsTasks.length} (${wsPct}%)`);
+  });
+  lines.push('');
+  lines.push(`COMPLETED IN LAST ${windowDays} DAYS`);
+  if (completedRecently.length) {
+    completedRecently.forEach(i => lines.push(`- [${i.key}] ${i.summary} (${i.assignee}) — ${formatDate(i.updated)}`));
+  } else {
+    lines.push(`- None`);
+  }
+  lines.push('');
+  lines.push(`IN PROGRESS`);
+  if (inDev.length) {
+    inDev.forEach(i => lines.push(`- [${i.key}] ${i.summary} (${i.assignee})${i.due?` — due ${formatDate(i.due)}`:''}`));
+  } else {
+    lines.push(`- None`);
+  }
+  lines.push('');
+  lines.push(`OVERDUE / NEEDS ATTENTION`);
+  const attn = [...overdue, ...dueSoon];
+  if (attn.length) {
+    attn.forEach(i => {
+      const isOver = overdue.includes(i);
+      lines.push(`- [${i.key}] ${i.summary} (${i.assignee}) — ${isOver?'OVERDUE since':'due'} ${formatDate(i.due)}`);
+    });
+  } else {
+    lines.push(`- None — all on track`);
+  }
+  document.getElementById('report-plaintext').value = lines.join('\n');
+}
+
+function copyReportToClipboard() {
+  const ta = document.getElementById('report-plaintext');
+  ta.style.display = 'block';
+  ta.select();
+  try {
+    document.execCommand('copy');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).catch(()=>{});
+    }
+    showToast('✓ Report copied — paste into Slack or email');
+  } catch (err) {
+    showToast('Could not copy automatically — select the text manually');
+  }
+  ta.style.display = 'none';
+}
+
 
 // ---- EXPORT ----
 function exportCSV() {
@@ -1262,309 +1464,6 @@ function exportCSV() {
   a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
   a.download = 'ATS_Project_Register_APR.csv';
   a.click();
-}
-
-// ---- IMPORT ----
-let pendingImport = null;
-
-function openImport() {
-  document.getElementById('import-overlay').classList.add('open');
-  resetImportUI();
-}
-function closeImport() {
-  document.getElementById('import-overlay').classList.remove('open');
-  pendingImport = null;
-}
-
-function resetImportUI() {
-  document.getElementById('drop-zone').style.borderColor = 'var(--border2)';
-  document.getElementById('drop-zone').style.background = 'var(--surface2)';
-  document.getElementById('drop-label').textContent = 'Drop your Jira HTML export here';
-  document.getElementById('drop-icon').innerHTML = `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" style="margin:0 auto;display:block;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>`;
-  document.getElementById('import-preview').style.display = 'none';
-  document.getElementById('import-confirm-btn').style.display = 'none';
-  document.getElementById('file-input').value = '';
-  pendingImport = null;
-}
-
-function handleDragOver(e) {
-  e.preventDefault();
-  const dz = document.getElementById('drop-zone');
-  dz.style.borderColor = 'var(--blue-mid)';
-  dz.style.background = 'var(--blue-bg)';
-}
-function handleDragLeave(e) {
-  const dz = document.getElementById('drop-zone');
-  dz.style.borderColor = 'var(--border2)';
-  dz.style.background = 'var(--surface2)';
-}
-function handleDrop(e) {
-  e.preventDefault();
-  handleDragLeave(e);
-  const file = e.dataTransfer.files[0];
-  if (file) processFile(file);
-}
-function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (file) processFile(file);
-}
-
-function processFile(file) {
-  if (!file.name.match(/\.html?$/i)) {
-    showImportError('Please select a .html file exported from Jira.');
-    return;
-  }
-  const dz = document.getElementById('drop-zone');
-  dz.style.borderColor = 'var(--blue-mid)';
-  dz.style.background = 'var(--blue-bg)';
-  document.getElementById('drop-label').textContent = `Reading ${file.name}…`;
-
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const parsed = parseJiraHTML(e.target.result);
-      if (!parsed || parsed.issues.length === 0) {
-        showImportError('No issues found in this file. Make sure you exported from Jira as HTML.');
-        return;
-      }
-      pendingImport = parsed;
-      showImportPreview(parsed, file.name);
-    } catch(err) {
-      showImportError('Could not parse this file: ' + err.message);
-    }
-  };
-  reader.readAsText(file);
-}
-
-function parseJiraHTML(html) {
-  // Parse using DOMParser for reliability
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-
-  // Extract export timestamp
-  const footerText = doc.querySelector('table:last-of-type td') ? doc.querySelector('table:last-of-type td').textContent : '';
-  const tsMatch = footerText.match(/Generated at (.+?) by (.+?) using/);
-  const exportedAt = tsMatch ? tsMatch[1].trim() : new Date().toUTCString();
-  const exportedBy = tsMatch ? tsMatch[2].trim() : 'Unknown';
-
-  // Extract issue count line
-  const countEl = doc.querySelector('table:first-of-type td strong');
-  const issueCount = countEl ? parseInt(countEl.textContent) : null;
-
-  // Extract project link
-  const jiraLink = doc.querySelector('table:first-of-type a');
-  const jiraHref = jiraLink ? jiraLink.href : '';
-
-  const rows = doc.querySelectorAll('tr[data-issuekey]');
-
-  function cellText(row, cls) {
-    const td = row.querySelector(`td.${cls}`);
-    return td ? td.textContent.replace(/\s+/g,' ').trim() : '';
-  }
-
-  function statusTooltip(row) {
-    const span = row.querySelector('td.status span[data-tooltip]');
-    if (!span) return '';
-    const tt = span.getAttribute('data-tooltip') || '';
-    const m = tt.match(/jira-issue-status-tooltip-title[^>]*>([^<]+)</);
-    return m ? m[1].trim() : span.textContent.trim();
-  }
-
-  function issueUrl(row, key) {
-    const a = row.querySelector(`a[data-issue-key="${key}"]`);
-    return a ? a.href : `https://stradaeducation.atlassian.net/browse/${key}`;
-  }
-
-  function parseSubtasks(row) {
-    const td = row.querySelector('td.subtasks');
-    if (!td) return [];
-    return Array.from(td.querySelectorAll('a')).map(a => a.textContent.trim()).filter(Boolean);
-  }
-
-  function parseDate(str) {
-    if (!str || str.trim() === '—' || str.trim() === '') return '';
-    // formats: "01/Apr/26", "06/Apr/26 1:50 PM", "2026-04-01"
-    const clean = str.trim().split(' ')[0];
-    // dd/Mon/yy
-    const m = clean.match(/^(\d{2})\/([A-Za-z]{3})\/(\d{2,4})$/);
-    if (m) {
-      const months = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
-      const yr = parseInt(m[3]) < 100 ? 2000+parseInt(m[3]) : parseInt(m[3]);
-      const d = new Date(yr, months[m[2]], parseInt(m[1]));
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
-    if (clean.match(/^\d{4}-\d{2}-\d{2}$/)) return clean;
-    return '';
-  }
-
-  function cleanDesc(str) {
-    return str.replace(/h[1-6]\.\s*/g,'').replace(/\*([^*]+)\*/g,'$1').replace(/\s+/g,' ').trim().substring(0,300);
-  }
-
-  function parentKey(row) {
-    const sum = row.querySelector('td.summary');
-    if (!sum) return '';
-    const span = sum.querySelector('span.parentIssue');
-    return span ? span.textContent.trim() : '';
-  }
-
-  const issues = [];
-  rows.forEach(row => {
-    const key = row.getAttribute('data-issuekey');
-    if (!key) return;
-    const typeRaw = cellText(row, 'issuetype');
-    let type = 'Task';
-    if (typeRaw.toLowerCase().includes('sub')) type = 'Sub-task';
-    else if (typeRaw.toLowerCase().includes('workstream')) type = 'Workstream';
-    else if (typeRaw.toLowerCase().includes('epic')) type = 'Workstream';
-
-    const summaryEl = row.querySelector('td.summary');
-    let summary = summaryEl ? summaryEl.textContent.replace(/\s+/g,' ').trim() : '';
-    // remove parent issue prefix like "APR-9"
-    summary = summary.replace(/^[A-Z]+-\d+\s*/, '').trim();
-
-    const status = statusTooltip(row) || cellText(row, 'status');
-    const parentVal = cellText(row, 'parent');
-    const pk = parentKey(row);
-    const descEl = row.querySelector('td.description');
-    const desc = descEl ? cleanDesc(descEl.textContent) : '';
-
-    issues.push({
-      key,
-      type,
-      summary,
-      status: status || 'Prospect',
-      parent: parentVal,
-      parentKey: pk,
-      assignee: cellText(row, 'assignee').replace('Unassigned','Unassigned') || 'Unassigned',
-      priority: cellText(row, 'priority') || 'Low',
-      start: parseDate(cellText(row, 'customfield_10015')),
-      due: parseDate(cellText(row, 'duedate')),
-      created: parseDate(cellText(row, 'created').split(' ')[0] + ' ' + cellText(row,'created').split(' ')[1]),
-      updated: parseDate(cellText(row, 'updated').split(' ')[0] + ' ' + cellText(row,'updated').split(' ')[1]),
-      reporter: cellText(row, 'reporter') || '',
-      url: issueUrl(row, key),
-      subtasks: parseSubtasks(row),
-      desc,
-    });
-  });
-
-  // Build dynamic WS config from Workstream-type issues
-  const wsIssues = issues.filter(i => i.type === 'Workstream');
-  const wsColors = ['#378ADD','#1D9E75','#d4900a','#7F77DD','#D4537E','#e05a2b','#2196a0','#8B5CF6'];
-  const wsConfig = wsIssues.map((ws, idx) => ({
-    name: ws.summary, key: ws.key, color: wsColors[idx % wsColors.length]
-  }));
-
-  // Dynamic assignees
-  const assigneeSet = [...new Set(issues.map(i => i.assignee).filter(a => a && a !== 'Unassigned'))];
-
-  return { issues, wsConfig, assigneeSet, exportedAt, exportedBy, issueCount };
-}
-
-function showImportError(msg) {
-  const dz = document.getElementById('drop-zone');
-  dz.style.borderColor = 'var(--red-mid)';
-  dz.style.background = 'var(--red-bg)';
-  document.getElementById('drop-icon').innerHTML = `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--red-mid)" stroke-width="1.5" style="margin:0 auto;display:block;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
-  document.getElementById('drop-label').textContent = msg;
-}
-
-function showImportPreview(parsed, filename) {
-  const { issues, wsConfig, assigneeSet, exportedAt, exportedBy } = parsed;
-  const tasks = issues.filter(i => i.type !== 'Workstream');
-  const done = tasks.filter(i => i.status === 'Done').length;
-  const inDev = tasks.filter(i => i.status === 'In Development').length;
-
-  // drop zone success state
-  const dz = document.getElementById('drop-zone');
-  dz.style.borderColor = 'var(--green-mid)';
-  dz.style.background = 'var(--green-bg)';
-  document.getElementById('drop-icon').innerHTML = `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--green-mid)" stroke-width="1.5" style="margin:0 auto;display:block;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
-  document.getElementById('drop-label').textContent = filename;
-
-  const preview = document.getElementById('import-preview');
-  preview.style.display = 'block';
-  preview.innerHTML = `
-    <div style="background:var(--green-bg);border:1px solid var(--green-mid);border-radius:var(--radius);padding:14px 16px;">
-      <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">✓ File parsed successfully</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
-        <div style="background:white;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:22px;font-weight:700;color:var(--text);">${tasks.length}</div>
-          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Total Issues</div>
-        </div>
-        <div style="background:white;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:22px;font-weight:700;color:var(--green);">${done}</div>
-          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">Done</div>
-        </div>
-        <div style="background:white;border-radius:6px;padding:10px;text-align:center;">
-          <div style="font-size:22px;font-weight:700;color:var(--blue);">${inDev}</div>
-          <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;">In Development</div>
-        </div>
-      </div>
-      <div style="font-size:11px;color:var(--green);display:flex;flex-direction:column;gap:3px;">
-        <div><strong>Workstreams detected:</strong> ${wsConfig.map(w=>w.name).join(', ') || 'None'}</div>
-        <div><strong>Team members:</strong> ${assigneeSet.join(', ') || 'None'}</div>
-        <div><strong>Exported:</strong> ${exportedAt} by ${exportedBy}</div>
-      </div>
-    </div>
-    <div style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center;">Clicking "Update Dashboard" will replace all current data with this import.</div>
-  `;
-
-  document.getElementById('import-confirm-btn').style.display = 'inline-flex';
-  document.getElementById('import-confirm-btn').style.alignItems = 'center';
-  document.getElementById('import-confirm-btn').style.gap = '6px';
-}
-
-function confirmImport() {
-  if (!pendingImport) return;
-  const { issues, wsConfig, assigneeSet, exportedAt } = pendingImport;
-
-  // Swap global ISSUES
-  ISSUES.length = 0;
-  issues.forEach(i => ISSUES.push(i));
-
-  // Swap WS_CONFIG
-  WS_CONFIG.length = 0;
-  wsConfig.forEach(w => WS_CONFIG.push(w));
-
-  // Rebuild AV registry dynamically
-  const avColors = [
-    {cls:'ST', bg:'#dcedfb', tc:'#1a56a0'},
-    {cls:'TO', bg:'#ede9fb', tc:'#4a3aaa'},
-    {cls:'JS', bg:'#d8f4ea', tc:'#1a6b47'},
-    {cls:'A4', bg:'#fef3dc', tc:'#7a4a08'},
-    {cls:'A5', bg:'#fde8e8', tc:'#8c1f1f'},
-  ];
-  Object.keys(AV).forEach(k => { if (k !== 'Unassigned') delete AV[k]; });
-  assigneeSet.forEach((name, idx) => {
-    const initials = name.split(' ').map(p=>p[0]).join('').substring(0,2).toUpperCase();
-    const col = avColors[idx % avColors.length];
-    AV[name] = { cls: col.cls, label: initials, name, bg: col.bg, tc: col.tc };
-  });
-
-  // Add CSS for new avatar classes dynamically
-  let styleTag = document.getElementById('dynamic-av-styles');
-  if (!styleTag) { styleTag = document.createElement('style'); styleTag.id='dynamic-av-styles'; document.head.appendChild(styleTag); }
-  styleTag.textContent = assigneeSet.map((name, idx) => {
-    const col = avColors[idx % avColors.length];
-    return `.av.${col.cls} { background: ${col.bg}; color: ${col.tc}; }`;
-  }).join('\n');
-
-  // Update filter dropdowns
-  rebuildFilterDropdowns();
-
-  // Update header badge
-  const tasks = issues.filter(i=>i.type!=='Workstream');
-  const d = new Date(exportedAt);
-  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const badgeDate = isNaN(d) ? 'Recent' : `${monthNames[d.getMonth()]} ${d.getFullYear()}`;
-  document.getElementById('issue-badge').textContent = `${tasks.length} issues · ${badgeDate}`;
-  document.querySelector('.last-updated').textContent = `Last import: ${exportedAt}`;
-
-  closeImport();
-  clearFilters();
-  showToast(`✓ Dashboard updated — ${tasks.length} issues imported`);
 }
 
 function rebuildFilterDropdowns() {
