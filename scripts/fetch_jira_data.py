@@ -40,18 +40,20 @@ WS_COLOR_MAP = {
 WS_FALLBACK_COLORS = ["#378ADD", "#1D9E75", "#d4900a", "#7F77DD", "#D4537E", "#e05a2b", "#2196a0", "#8B5CF6"]
 
 
-def jira_request(jql, start_at=0, max_results=100):
+def jira_request(jql, next_page_token=None, max_results=100):
     email = os.environ["JIRA_EMAIL"]
     token = os.environ["JIRA_API_TOKEN"]
     auth = base64.b64encode(f"{email}:{token}".encode()).decode()
 
     url = f"{JIRA_BASE}/rest/api/3/search/jql"
-    body = json.dumps({
+    body_dict = {
         "jql": jql,
-        "startAt": start_at,
         "maxResults": max_results,
         "fields": FIELDS,
-    }).encode()
+    }
+    if next_page_token:
+        body_dict["nextPageToken"] = next_page_token
+    body = json.dumps(body_dict).encode()
 
     req = urllib.request.Request(url, data=body, method="POST")
     req.add_header("Authorization", f"Basic {auth}")
@@ -68,14 +70,14 @@ def jira_request(jql, start_at=0, max_results=100):
 
 def fetch_all_issues():
     all_issues = []
-    start_at = 0
+    next_page_token = None
     while True:
-        data = jira_request(f"project = {PROJECT_KEY} ORDER BY key ASC", start_at=start_at)
+        data = jira_request(f"project = {PROJECT_KEY} ORDER BY key ASC", next_page_token=next_page_token)
         issues = data.get("issues", [])
         all_issues.extend(issues)
-        if data.get("isLast", True) or not issues:
+        next_page_token = data.get("nextPageToken")
+        if not next_page_token or not issues:
             break
-        start_at += len(issues)
     return all_issues
 
 
