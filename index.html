@@ -274,7 +274,7 @@
     <span class="project-name">Strada · Project APR</span>
   </div>
   <div class="header-right">
-    <span class="header-badge" id="issue-badge">37 issues · Apr 2026</span>
+    <span class="header-badge" id="issue-badge">37 issues · Jun 2026 · Live</span>
     <a href="https://stradaeducation.atlassian.net/issues/?jql=project+%3D+APR" target="_blank" class="header-link">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Open in Jira
@@ -344,7 +344,7 @@
     </div>
     <button class="clear-btn" onclick="clearFilters()">Clear</button>
     <span class="filter-count" id="filter-count"></span>
-    <span class="last-updated">Last export: 11/May/26 9:23 AM ET (Sam Toriola)</span>
+    <span class="last-updated">Live data pulled from Jira: 30/Jun/26 (Eastern Time)</span>
   </div>
 
   <!-- METRICS -->
@@ -459,8 +459,8 @@
         <div class="gantt-legend">
           <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#378ADD"></div> In Development</div>
           <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#4a9e2a"></div> Done</div>
-          <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#d4900a"></div> Scope & Legal</div>
-          <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#b0ada4"></div> Backlog</div>
+          <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#d4900a"></div> Planning</div>
+          <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#b0ada4"></div> Prospect</div>
           <div class="gantt-legend-item"><div class="gantt-legend-swatch" style="background:#d94040;width:3px;height:14px;border-radius:1px;"></div> Today</div>
         </div>
         <div id="gantt-issue-count" style="font-size:11px;color:var(--text3);"></div>
@@ -551,48 +551,54 @@
 </div>
 
 <script>
-const TODAY = new Date('2026-04-06');
-const ISSUES = [
-  {key:'APR-43',type:'Task',summary:'Core Analysis Data Model - Stoytellers',status:'Done',parent:'Data Infrastructure and Governance',parentKey:'',assignee:'Unassigned',priority:'Low',start:'2026-01-22',due:'2026-05-08',created:'2026-04-08',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-43',subtasks:[],desc:''},
-  {key:'APR-36',type:'Task',summary:'Seattle Colleges',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Todd Oldham',priority:'Low',start:'2026-04-01',due:'2026-07-31',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-36',subtasks:[],desc:'Context Analyzing academic records in relation to social profiles. Acceptance criteria  Academic records must be accurately matched to corresponding social profiles.  Insights gained from the analysis should be documented.  The analysis should identify trends or patterns in student engagement.  Visu'},
-  {key:'APR-40',type:'Task',summary:'ArcheType - WBL Adoption for UNT',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-40',subtasks:[],desc:'Summary Create an Internship dashboard for UNT. It should be similar to the one developed for Virginia EEO. Acceptance criteria  The dashboard must be designed for UNT.  It should replicate the structure and features of the Virginia EEO dashboard. Other information N/A'},
-  {key:'APR-44',type:'Task',summary:'ArcheType - WBL Adoption for MS',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-44',subtasks:[],desc:'WBL dashboard adoption for Mississippi'},
-  {key:'APR-3',type:'Task',summary:'UNT Talent Accelerator',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Sam Toriola',priority:'High',start:'2026-01-05',due:'2026-06-30',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-3',subtasks:[],desc:'Context This issue involves unmatched social profile analysis aimed at certain industries and occupations in North Texas. Acceptance criteria  Conduct social profile analysis for selected North Texas industries.  Identify key occupations within these industries.  Provide insights on talent availabil'},
-  {key:'APR-11',type:'Task',summary:'SOI EA Data Report Update',status:'In Development',parent:'Ad Hoc Workstream',parentKey:'',assignee:'Jackson Sauls',priority:'Critical',start:'2026-03-30',due:'2026-05-15',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-11',subtasks:[],desc:'State Opportunity Index report update Date Milestone Mar 24–Apr 4 Replicate 2025 underemployment Apr 6–10 Deliver 2026 national underemployment + demographics Apr 7–18 Replicate 2025 S/D ratios Apr 21 Research team check-in Apr 21–May 9 State-level production (both components) May 9–16 QA state-leve'},
-  {key:'APR-1',type:'Task',summary:'Western NC Landscape Analysis',status:'Done',parent:'Ad Hoc Workstream',parentKey:'',assignee:'Sam Toriola',priority:'Critical',start:'2026-01-15',due:'2026-04-30',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-1',subtasks:[],desc:'Context This issue involves performing five core workforce analyses. The analyses will concentrate on specific priority occupations and industries. Acceptance criteria  Conduct four core workforce analyses.  Focus on select priority occupations. * Focus on select industries. Other information N/A'},
-  {key:'APR-26',type:'Task',summary:'ArcheType - Analytics Hub Design',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'',assignee:'Sam Toriola',priority:'Medium',start:'2026-03-16',due:'2026-04-29',created:'2026-04-02',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-26',subtasks:[],desc:'Project Objectives: Design and build the Strada Analytics Hub to seamlessly integrate with Strada’s website and brand and to serve as the consumption layer for Strada Analytics Products. Initially it will host embedded analytics from Tableau on the backend but is extensible to other technologies.'},
-  {key:'APR-7',type:'Task',summary:'Internship Demand Dashboard - WBL',status:'Done',parent:'Dashboard Ecosystem',parentKey:'',assignee:'Jackson Sauls',priority:'Medium',start:'2025-01-30',due:'2026-07-01',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-7',subtasks:[],desc:'User story  As a job seeker, when I look for entry-level jobs, I want to see recent activity on demand for these positions so that I can understand the job market better.  As an intern coordinator, when I review internship opportunities, I want to access data on aligned internships within GO Va regi'},
-  {key:'APR-8',type:'Task',summary:'Ascend Indiana',status:'Done',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Sam Toriola',priority:'Medium',start:'2026-04-01',due:'2026-07-25',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-8',subtasks:[],desc:'User story  As a data analyst, when I analyze social profiles, I want to focus on specific occupations and industries so that I can provide tailored insights. Context This issue involves unmatched social profile analysis. The analysis is specifically targeted at select occupations and industries. Ac'},
-  {key:'APR-9',type:'Task',summary:'Accelerate MS (Mississippi)',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Todd Oldham',priority:'Low',start:'2026-04-01',due:'2026-09-30',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-9',subtasks:[],desc:' As a data analyst, when I analyze academic records, I want to match them to social profiles so that I can gain insights into student demographics. Context This issue involves the analysis of academic records and their correlation with social profiles. The goal is to enhance understanding of student'},
-  {key:'APR-10',type:'Task',summary:'Hawaii',status:'Planning',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Todd Oldham',priority:'Low',start:'',due:'',created:'2026-01-26',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-10',subtasks:[],desc:''},
-  {key:'APR-6',type:'Task',summary:'High Demand Modeling Tool (SOI Phase 2)',status:'Planning',parent:'Dashboard Ecosystem',parentKey:'',assignee:'Unassigned',priority:'Low',start:'2026-06-01',due:'2026-09-30',created:'2026-01-26',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-6',subtasks:[],desc:'Context This issue addresses the development of a dashboard designed to help states rapidly create high demand/value models for analysis. The second phase will integrate Indiana&#39;s Top Jobs methodology and an Industry Recognized Credential framework. Acceptance criteria  The dashboard must allow '},
-  {key:'APR-12',type:'Sub-task',summary:'Core Analysis - Storytellers',status:'In Development',parent:'UNT Talent Accelerator',parentKey:'APR-3',assignee:'Unassigned',priority:'High',start:'2026-01-26',due:'2026-05-29',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-12',subtasks:[],desc:'* Finalize core analysis based on work session with Storytellers'},
-  {key:'APR-13',type:'Sub-task',summary:'UNT Sample Representativeness - IPEDS vs Lightcast',status:'Done',parent:'UNT Talent Accelerator',parentKey:'APR-3',assignee:'Unassigned',priority:'Medium',start:'2026-01-22',due:'2026-02-03',created:'2026-01-26',updated:'2026-03-20',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-13',subtasks:[],desc:'Comparing Lightcast social profiles sample to IPEDS completions'},
-  {key:'APR-17',type:'Workstream',summary:'State/Regional EEO Initiatives',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'High',start:'',due:'',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-17',subtasks:[],desc:'Context This initiative involves collaboration with various state and regional efforts aimed at enhancing educational economic development. Scope  Included: Efforts related to education economic offices and Strada&#39;s analytics and technical services.  Not Included: Other unrelated educational ini'},
+const TODAY = new Date(); // always "now" once data is live
+let ISSUES = [];
+let DATA_FETCHED_AT = null;
+
+// Fallback snapshot used only if data.json hasn't loaded yet (e.g. first deploy
+// before the Action has run once). Safe to leave in place — it's overwritten
+// the moment live data arrives.
+const FALLBACK_ISSUES = [
+  {key:'APR-1',type:'Task',summary:'Western NC Landscape Analysis',status:'Done',parent:'Ad Hoc Workstream',parentKey:'APR-33',assignee:'Sam Toriola',priority:'Critical',start:'2026-01-15',due:'2026-04-30',created:'2026-01-26',updated:'2026-05-05',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-1',subtasks:['APR-20','APR-21','APR-24'],desc:'Context This issue involves performing five core workforce analyses. The analyses will concentrate on specific priority occupations and industries. Acceptance criteria Conduct four core workforce analyses. Focus on select priority occupations. Focus on select industries. Other information N/A'},
+  {key:'APR-3',type:'Task',summary:'UNT Talent Accelerator outcomes analysis',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Sam Toriola',priority:'High',start:'2026-01-05',due:'2026-06-30',created:'2026-01-26',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-3',subtasks:['APR-12','APR-13','APR-27','APR-28','APR-29'],desc:'Context This issue involves unmatched social profile analysis aimed at certain industries and occupations in North Texas. Acceptance criteria Conduct social profile analysis for selected North Texas industries. Identify key occupations within these industries. Provide insights on talent availability and suitability. Other information Possible issues with Lightcast data, if TTA wants to publicly di'},
+  {key:'APR-6',type:'Task',summary:'High Demand Modeling Tool (SOI Phase 2)',status:'Planning',parent:'Dashboard Ecosystem',parentKey:'APR-18',assignee:'Unassigned',priority:'Low',start:'2026-06-01',due:'2026-09-30',created:'2026-01-26',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-6',subtasks:[],desc:'Context This issue addresses the development of a dashboard designed to help states rapidly create high demand/value models for analysis. The second phase will integrate Indiana\'s Top Jobs methodology and an Industry Recognized Credential framework. Acceptance criteria The dashboard must allow for rapid creation of high demand/value models. The tool must incorporate Indiana\'s Top Jobs methodology.'},
+  {key:'APR-7',type:'Task',summary:'Internship Demand Dashboard - WBL',status:'Done',parent:'Dashboard Ecosystem',parentKey:'APR-18',assignee:'Jackson Sauls',priority:'Medium',start:'2025-01-30',due:'2026-07-01',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-7',subtasks:[],desc:'User story As a job seeker, when I look for entry-level jobs, I want to see recent activity on demand for these positions so that I can understand the job market better. As an intern coordinator, when I review internship opportunities, I want to access data on aligned internships within GO Va regions so that I can effectively match candidates with opportunities. Context This issue focuses on creat'},
+  {key:'APR-8',type:'Task',summary:'Ascend Indiana',status:'Done',parent:'Ad Hoc Workstream',parentKey:'APR-33',assignee:'Sam Toriola',priority:'Medium',start:'2026-04-13',due:'2026-07-25',created:'2026-01-26',updated:'2026-05-01',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-8',subtasks:[],desc:'Summary The issue involves using the Social profile dataset in Lightcast. The goal is to describe the characteristics of the incumbent workforce. This includes skills, qualifications, and educational backgrounds categorized by occupation and industry. Context This task focuses on analyzing workforce characteristics. It aims to provide insights into various occupations and industries using the Soci'},
+  {key:'APR-9',type:'Task',summary:'Accelerate MS (Mississippi) matched outcomes',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Todd Oldham',priority:'Low',start:'2026-04-01',due:'2026-09-30',created:'2026-01-26',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-9',subtasks:['APR-39','APR-45'],desc:'‌ As a data analyst, when I analyze academic records, I want to match them to social profiles so that I can gain insights into student demographics. Context This issue involves the analysis of academic records and their correlation with social profiles. The goal is to enhance understanding of student demographics through data matching. Acceptance criteria Academic records must be successfully matc'},
+  {key:'APR-10',type:'Task',summary:'Hawaii',status:'Planning',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Todd Oldham',priority:'Low',start:'',due:'',created:'2026-01-26',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-10',subtasks:[],desc:''},
+  {key:'APR-11',type:'Task',summary:'SOI EA Data Report Update',status:'Done',parent:'Ad Hoc Workstream',parentKey:'APR-33',assignee:'Jackson Sauls',priority:'Critical',start:'2026-03-30',due:'2026-05-15',created:'2026-01-26',updated:'2026-06-23',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-11',subtasks:['APR-31','APR-32','APR-42'],desc:'State Opportunity Index report update Date Milestone Mar 24–Apr 4 Replicate 2025 underemployment Apr 6–10 Deliver 2026 national underemployment + demographics Apr 7–18 Replicate 2025 S/D ratios Apr 21 Research team check-in Apr 21–May 9 State-level production (both components) May 9–16 QA state-level results Mid-May Deliver full 2026 state-level dataset + national S/D'},
+  {key:'APR-12',type:'Sub-task',summary:'Core Analysis - Storytellers',status:'Done',parent:'UNT Talent Accelerator outcomes analysis',parentKey:'APR-3',assignee:'Unassigned',priority:'High',start:'2026-01-26',due:'2026-05-29',created:'2026-01-26',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-12',subtasks:[],desc:'Finalize core analysis based on work session with Storytellers'},
+  {key:'APR-13',type:'Sub-task',summary:'UNT Sample Representativeness - IPEDS vs Lightcast',status:'Done',parent:'UNT Talent Accelerator outcomes analysis',parentKey:'APR-3',assignee:'Unassigned',priority:'Medium',start:'2026-01-22',due:'2026-02-03',created:'2026-01-26',updated:'2026-03-20',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-13',subtasks:[],desc:'Comparing Lightcast social profiles sample to IPEDS completions'},
+  {key:'APR-17',type:'Workstream',summary:'State/Regional EEO Initiatives',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'High',start:'',due:'',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-17',subtasks:[],desc:'Context This initiative involves collaboration with various state and regional efforts aimed at enhancing educational economic development. Scope Included: Efforts related to education economic offices and Strada\'s analytics and technical services. Not Included: Other unrelated educational initiatives or services outside of Strada\'s offerings. Success criteria Successful identification of state an'},
   {key:'APR-18',type:'Workstream',summary:'Dashboard Ecosystem',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'Medium',start:'',due:'',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-18',subtasks:[],desc:'Current analytical dashboards being developed by the ATS team.'},
   {key:'APR-19',type:'Workstream',summary:'Data Infrastructure and Governance',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'Medium',start:'',due:'',created:'2026-01-26',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-19',subtasks:[],desc:'Add ongoing data infrastructure and governance tickets'},
-  {key:'APR-20',type:'Sub-task',summary:'1. Workforce Demand Side Analysis - Sam',status:'Done',parent:'Western NC Landscape Analysis',parentKey:'APR-1',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-01-29',updated:'2026-03-31',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-20',subtasks:[],desc:'# Workforce Demand Side Analysis Sam  Current and projected workforce demand for priority staffing patterns within Healthcare and Social Assistance and Manufacturing industry sectors. The analysis will combine job posting analytics with traditional labor market data to produce a view of occupational'},
-  {key:'APR-21',type:'Sub-task',summary:'1. Workforce Demand Side Analysis - Jackson',status:'Done',parent:'Western NC Landscape Analysis',parentKey:'APR-1',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-01-29',updated:'2026-03-31',reporter:'Jackson Sauls',url:'https://stradaeducation.atlassian.net/browse/APR-21',subtasks:[],desc:'Jackson  Replacement demand arising from retirements and other permanent labor force [http://exits.To|http://exits.To|smart-link] reduce overreliance on real-time postings—which can fluctuate due to market conditions—the analysis will be supplemented with historical employment trends, industry proje'},
+  {key:'APR-20',type:'Sub-task',summary:'1. Workforce Demand Side Analysis - Sam',status:'Done',parent:'Western NC Landscape Analysis',parentKey:'APR-1',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-01-29',updated:'2026-03-31',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-20',subtasks:[],desc:'1. Workforce Demand Side Analysis Sam Current and projected workforce demand for priority staffing patterns within Healthcare and Social Assistance and Manufacturing industry sectors. The analysis will combine job posting analytics with traditional labor market data to produce a view of occupational demand, skill requirements, and long-term workforce needs. Using job posting analytics data, measur'},
+  {key:'APR-21',type:'Sub-task',summary:'1. Workforce Demand Side Analysis  - Jackson',status:'Done',parent:'Western NC Landscape Analysis',parentKey:'APR-1',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-01-29',updated:'2026-03-31',reporter:'Jackson Sauls',url:'https://stradaeducation.atlassian.net/browse/APR-21',subtasks:[],desc:'Jackson Replacement demand arising from retirements and other permanent labor force <custom data-type="smartlink" data-id="id-0">http://exits.To</custom> reduce overreliance on real-time postings—which can fluctuate due to market conditions—the analysis will be supplemented with historical employment trends, industry projections, and occupation-level age distribution data where available. This wil'},
+  {key:'APR-23',type:'Workstream',summary:'ATS Project Management',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-02-02',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-23',subtasks:[],desc:'Work Plan Ingestion schedule Staffing update'},
   {key:'APR-24',type:'Sub-task',summary:'Executive Summary Slide and Data sources',status:'Done',parent:'Western NC Landscape Analysis',parentKey:'APR-1',assignee:'Sam Toriola',priority:'Medium',start:'',due:'2026-04-20',created:'2026-03-31',updated:'2026-04-08',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-24',subtasks:[],desc:'Provide executive summary slides to GMBE along with data sources (Lightcast data pull into excel files by region)'},
-  {key:'APR-27',type:'Sub-task',summary:'Julius - UNT Career Map',status:'In Development',parent:'UNT Talent Accelerator',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'2026-03-23',due:'2026-06-30',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-27',subtasks:[],desc:'North Texas Career Maps for UNT Semi conductor and Energy Career Maps'},
-  {key:'APR-28',type:'Sub-task',summary:'College Outcome and Viewer (ArcheType)',status:'In Development',parent:'UNT Talent Accelerator',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-28',subtasks:[],desc:''},
-  {key:'APR-29',type:'Sub-task',summary:'WBL Adoption',status:'In Development',parent:'UNT Talent Accelerator',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-29',subtasks:[],desc:''},
-  {key:'APR-31',type:'Sub-task',summary:'2026 National and states Underemployment + Demographics',status:'Done',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Medium',start:'2026-04-03',due:'2026-04-10',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-31',subtasks:[],desc:''},
-  {key:'APR-32',type:'Sub-task',summary:'Replicate 2025 S/F Ratios',status:'In Development',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Low',start:'2026-04-07',due:'2026-04-20',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-32',subtasks:[],desc:''},
+  {key:'APR-26',type:'Task',summary:'ArcheType - Analytics Hub Design',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'APR-18',assignee:'Sam Toriola',priority:'Medium',start:'2026-03-16',due:'2026-04-29',created:'2026-04-02',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-26',subtasks:[],desc:'Project Objectives: Design and build the Strada Analytics Hub to seamlessly integrate with Strada’s website and brand and to serve as the consumption layer for Strada Analytics Products. Initially it will host embedded analytics from Tableau on the backend but is extensible to other technologies.'},
+  {key:'APR-27',type:'Sub-task',summary:'Julius -  UNT Career Map',status:'In Development',parent:'UNT Talent Accelerator outcomes analysis',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'2026-03-23',due:'2026-09-01',created:'2026-04-06',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-27',subtasks:[],desc:'North Texas Career Maps for UNT Semi conductor and Energy Career Maps'},
+  {key:'APR-28',type:'Sub-task',summary:'College Outcome and Viewer (ArcheType)',status:'In Development',parent:'UNT Talent Accelerator outcomes analysis',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-28',subtasks:[],desc:''},
+  {key:'APR-29',type:'Sub-task',summary:'WBL Adoption',status:'In Development',parent:'UNT Talent Accelerator outcomes analysis',parentKey:'APR-3',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-29',subtasks:[],desc:''},
+  {key:'APR-31',type:'Sub-task',summary:'2026 National and states Underemployment + Demographics',status:'Done',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Medium',start:'2026-04-03',due:'2026-04-10',created:'2026-04-06',updated:'2026-04-10',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-31',subtasks:[],desc:''},
+  {key:'APR-32',type:'Sub-task',summary:'Replicate 2025 S/F Ratios',status:'Done',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Low',start:'2026-04-07',due:'2026-04-20',created:'2026-04-06',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-32',subtasks:[],desc:''},
   {key:'APR-33',type:'Workstream',summary:'Ad Hoc Workstream',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'Medium',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-33',subtasks:[],desc:''},
-  {key:'APR-23',type:'Workstream',summary:'ATS Project Management',status:'Strategic Workstreams',parent:'',parentKey:'',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-02-02',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-23',subtasks:[],desc:'Work Plan  Ingestion schedule  Staffing update'},
-  {key:'APR-38',type:'Task',summary:'ATS Service Request Form',status:'Done',parent:'ATS Project Management',parentKey:'',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-38',subtasks:[],desc:'Summary Create an adhoc ATS Service Request Form. Context This issue involves the development of a service request form for ATS. Acceptance criteria * An adhoc ATS Service Request Form must be created. Other information N/A'},
-  {key:'APR-37',type:'Task',summary:'Research Data Lab (RDL) Ingestion Schedule',status:'In Development',parent:'Data Infrastructure and Governance',parentKey:'',assignee:'Sam Toriola',priority:'Low',start:'2026-04-01',due:'2026-12-31',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-37',subtasks:[],desc:'Summary The task is to update the ingestion schedule for the Research Data Lab (RDL) as needed. Context This issue pertains to the Research Data Lab (RDL) and involves modifying the current ingestion schedule. Acceptance criteria  The ingestion schedule must be updated according to the latest requir'},
-  {key:'APR-39',type:'Sub-task',summary:'Outcomes Dashboard (Undermployment)',status:'In Development',parent:'Accelerate MS (Mississippi)',parentKey:'APR-9',assignee:'Unassigned',priority:'Medium',start:'2026-04-01',due:'2026-07-31',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-39',subtasks:[],desc:'Replicate UNT Outcomes dashboard for MS'},
-  {key:'APR-42',type:'Sub-task',summary:'Full State-Level Dataset + National S/D',status:'In Development',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Low',start:'2026-04-06',due:'2026-05-15',created:'2026-04-08',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-42',subtasks:[],desc:''},
-  {key:'APR-45',type:'Sub-task',summary:'WBL Adoption from UNT',status:'In Development',parent:'Accelerate MS (Mississippi)',parentKey:'APR-9',assignee:'Unassigned',priority:'Medium',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-45',subtasks:[],desc:''},
-  {key:'APR-50',type:'Task',summary:'Arizona',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-50',subtasks:[],desc:''},
-  {key:'APR-51',type:'Task',summary:'Iowa',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-51',subtasks:[],desc:''},
-  {key:'APR-52',type:'Task',summary:'Colorado',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-52',subtasks:[],desc:''},
-  {key:'APR-53',type:'Task',summary:'Idaho',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-53',subtasks:[],desc:''},
+  {key:'APR-36',type:'Task',summary:'Seattle Colleges',status:'In Development',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Todd Oldham',priority:'Low',start:'2026-04-01',due:'2026-07-31',created:'2026-04-06',updated:'2026-05-11',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-36',subtasks:[],desc:'Context Analyzing academic records in relation to social profiles. Acceptance criteria Academic records must be accurately matched to corresponding social profiles. Insights gained from the analysis should be documented. The analysis should identify trends or patterns in student engagement. Visualize data'},
+  {key:'APR-37',type:'Task',summary:'Research Data Lab (RDL) Ingestion Schedule',status:'Strategic Workstreams',parent:'Data Infrastructure and Governance',parentKey:'APR-19',assignee:'Sam Toriola',priority:'Low',start:'2026-04-01',due:'2026-12-31',created:'2026-04-06',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-37',subtasks:[],desc:'Summary The task is to update the ingestion schedule for the Research Data Lab (RDL) as needed. Context This issue pertains to the Research Data Lab (RDL) and involves modifying the current ingestion schedule. Acceptance criteria The ingestion schedule must be updated according to the latest requirements. Ensure that all stakeholders are informed about the changes made. Other information N/A'},
+  {key:'APR-38',type:'Task',summary:'ATS Service Request Form',status:'Done',parent:'ATS Project Management',parentKey:'APR-23',assignee:'Sam Toriola',priority:'Low',start:'',due:'',created:'2026-04-06',updated:'2026-04-06',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-38',subtasks:[],desc:'Summary Create an adhoc ATS Service Request Form. Context This issue involves the development of a service request form for ATS. Acceptance criteria An adhoc ATS Service Request Form must be created. Other information N/A'},
+  {key:'APR-39',type:'Sub-task',summary:'Outcomes Dashboard (Undermployment)',status:'In Development',parent:'Accelerate MS (Mississippi) matched outcomes',parentKey:'APR-9',assignee:'Unassigned',priority:'Medium',start:'2026-04-01',due:'2026-07-31',created:'2026-04-06',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-39',subtasks:[],desc:'Replicate UNT Outcomes dashboard for MS'},
+  {key:'APR-40',type:'Task',summary:'ArcheType - WBL Adoption for UNT',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'APR-18',assignee:'Unassigned',priority:'Low',start:'',due:'2026-08-15',created:'2026-04-06',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-40',subtasks:[],desc:'Summary Create an Internship dashboard for UNT. It should be similar to the one developed for Virginia EEO. Acceptance criteria The dashboard must be designed for UNT. It should replicate the structure and features of the Virginia EEO dashboard. Other information N/A'},
+  {key:'APR-42',type:'Sub-task',summary:'Full State-Level Dataset + National S/D',status:'Done',parent:'SOI EA Data Report Update',parentKey:'APR-11',assignee:'Jackson Sauls',priority:'Low',start:'2026-04-06',due:'2026-05-15',created:'2026-04-08',updated:'2026-06-29',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-42',subtasks:[],desc:''},
+  {key:'APR-43',type:'Task',summary:'Core Analysis Data Model - Stoytellers',status:'Done',parent:'Data Infrastructure and Governance',parentKey:'APR-19',assignee:'Unassigned',priority:'Low',start:'2026-01-22',due:'2026-05-08',created:'2026-04-08',updated:'2026-05-10',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-43',subtasks:[],desc:'This project covers the design and execution of six priority analyses for the North Texas engagement, led in partnership with the UNT Talent Accelerator (UNT TTA). Analyses use matched student/graduate social profile data from Lightcast, supplemented by ACS, IPEDS, and job postings data, and are scoped to graduates from \\~27 focus institutions across the Dallas-Fort Worth metro (Dallas, Tarrant, C'},
+  {key:'APR-44',type:'Task',summary:'ArcheType - WBL Adoption for MS',status:'In Development',parent:'Dashboard Ecosystem',parentKey:'APR-18',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-44',subtasks:[],desc:'WBL dashboard adoption for Mississippi'},
+  {key:'APR-45',type:'Sub-task',summary:'WBL Adoption from UNT',status:'In Development',parent:'Accelerate MS (Mississippi) matched outcomes',parentKey:'APR-9',assignee:'Sam Toriola',priority:'Medium',start:'',due:'',created:'2026-04-09',updated:'2026-05-21',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-45',subtasks:[],desc:''},
+  {key:'APR-50',type:'Task',summary:'Arizona',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-50',subtasks:[],desc:''},
+  {key:'APR-51',type:'Task',summary:'Iowa',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-05-18',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-51',subtasks:[],desc:''},
+  {key:'APR-52',type:'Task',summary:'Colorado',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-52',subtasks:[],desc:''},
+  {key:'APR-53',type:'Task',summary:'Idaho',status:'Prospect',parent:'State/Regional EEO Initiatives',parentKey:'APR-17',assignee:'Unassigned',priority:'Low',start:'',due:'',created:'2026-04-09',updated:'2026-04-09',reporter:'Sam Toriola',url:'https://stradaeducation.atlassian.net/browse/APR-53',subtasks:[],desc:''},
 ];
 
-const WS_CONFIG = [
+let WS_CONFIG = [
   {name:'State/Regional EEO Initiatives', color:'#378ADD', key:'APR-17'},
   {name:'Dashboard Ecosystem', color:'#1D9E75', key:'APR-18'},
   {name:'Ad Hoc Workstream', color:'#d4900a', key:'APR-33'},
@@ -712,8 +718,8 @@ function renderMetrics() {
   const tasks = data.filter(i => i.type !== 'Workstream');
   const done = tasks.filter(i => i.status === 'Done').length;
   const inDev = tasks.filter(i => i.status === 'In Development').length;
-  const scope = tasks.filter(i => i.status === 'Scope & Legal').length;
-  const backlog = tasks.filter(i => i.status === 'Backlog').length;
+  const planning = tasks.filter(i => i.status === 'Planning').length;
+  const prospect = tasks.filter(i => i.status === 'Prospect').length;
   const pct = tasks.length ? Math.round(done/tasks.length*100) : 0;
   const overdue = tasks.filter(i => { const d = parseDue(i.due); return d && d < TODAY && i.status !== 'Done'; }).length;
 
@@ -734,14 +740,14 @@ function renderMetrics() {
       <div class="metric-num">${inDev}</div>
       <div class="metric-sub">active now</div>
     </div>
-    <div class="metric-card amber" title="Awaiting scope or legal review before work can begin">
-      <div class="metric-lbl">Scope & Legal</div>
-      <div class="metric-num">${scope}</div>
-      <div class="metric-sub">pending review</div>
+    <div class="metric-card amber" title="Currently in planning">
+      <div class="metric-lbl">Planning</div>
+      <div class="metric-num">${planning}</div>
+      <div class="metric-sub">pending kickoff</div>
     </div>
-    <div class="metric-card gray" title="Not yet started">
-      <div class="metric-lbl">Backlog</div>
-      <div class="metric-num">${backlog}</div>
+    <div class="metric-card gray" title="Not yet started — prospective work">
+      <div class="metric-lbl">Prospect</div>
+      <div class="metric-num">${prospect}</div>
       <div class="metric-sub">not started</div>
     </div>
     <div class="metric-card ${overdue>0?'red':'green'}" title="${overdue} issue(s) past due date">
@@ -772,7 +778,7 @@ function renderWSProgress() {
     const done = wsTasks.filter(i => i.status === 'Done').length;
     const pct = wsTasks.length ? Math.round(done/wsTasks.length*100) : 0;
     const inDev = wsTasks.filter(i=>i.status==='In Development').length;
-    const scope = wsTasks.filter(i=>i.status==='Scope & Legal').length;
+    const planning = wsTasks.filter(i=>i.status==='Planning').length;
     return `
       <div class="ws-row tooltip-wrap" onclick="filterByWS('${ws.name}')">
         <div class="ws-top">
@@ -789,7 +795,7 @@ function renderWSProgress() {
           <div class="tooltip-row"><span class="tooltip-row-label">Total tasks</span><span class="tooltip-row-val">${wsTasks.length}</span></div>
           <div class="tooltip-row"><span class="tooltip-row-label">Done</span><span class="tooltip-row-val">${done}</span></div>
           <div class="tooltip-row"><span class="tooltip-row-label">In Development</span><span class="tooltip-row-val">${inDev}</span></div>
-          <div class="tooltip-row"><span class="tooltip-row-label">Scope & Legal</span><span class="tooltip-row-val">${scope}</span></div>
+          <div class="tooltip-row"><span class="tooltip-row-label">Planning</span><span class="tooltip-row-val">${planning}</span></div>
           <div class="tooltip-row"><span class="tooltip-row-label">Progress</span><span class="tooltip-row-val">${pct}%</span></div>
           <div class="tooltip-desc">Click to filter dashboard to this workstream.</div>
         </div>
@@ -976,7 +982,7 @@ const QUARTER_RANGES = {
 };
 const ALL_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MONTH_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const TODAY_M = 3; // April = index 3
+const TODAY_M = 5; // June = index 5
 
 function setGanttScope(scope, btn) {
   ganttScope = scope;
@@ -1049,7 +1055,7 @@ function renderGantt() {
     ganttIssues.forEach(i => { (map[i.assignee]=map[i.assignee]||[]).push(i); });
     groups = [...order.filter(k=>map[k]), ...Object.keys(map).filter(k=>!order.includes(k))].map(k => ({label:k, issues:map[k]}));
   } else if (groupBy === 'status') {
-    const order = ['In Development','Scope & Legal','Backlog','Done','Strategic Workstreams'];
+    const order = ['In Development','Planning','Prospect','Done','Strategic Workstreams'];
     const map = {};
     ganttIssues.forEach(i => { (map[i.status]=map[i.status]||[]).push(i); });
     groups = [...order.filter(k=>map[k]), ...Object.keys(map).filter(k=>!order.includes(k))].map(k => ({label:k, issues:map[k]}));
@@ -1427,7 +1433,7 @@ function parseJiraHTML(html) {
       key,
       type,
       summary,
-      status: status || 'Backlog',
+      status: status || 'Prospect',
       parent: parentVal,
       parentKey: pk,
       assignee: cellText(row, 'assignee').replace('Unassigned','Unassigned') || 'Unassigned',
@@ -1594,8 +1600,65 @@ function showToast(msg) {
   }, 3500);
 }
 
+// ---- LIVE DATA LOADING ----
+async function loadLiveData() {
+  try {
+    const res = await fetch('data/data.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+
+    ISSUES = payload.issues || [];
+    if (payload.wsConfig && payload.wsConfig.length) WS_CONFIG = payload.wsConfig;
+    DATA_FETCHED_AT = payload.fetchedAt || null;
+
+    // Rebuild AV registry to match whoever is actually assigned in live data
+    const avColors = [
+      {cls:'ST', bg:'#dcedfb', tc:'#1a56a0'},
+      {cls:'TO', bg:'#ede9fb', tc:'#4a3aaa'},
+      {cls:'JS', bg:'#d8f4ea', tc:'#1a6b47'},
+      {cls:'A4', bg:'#fef3dc', tc:'#7a4a08'},
+      {cls:'A5', bg:'#fde8e8', tc:'#8c1f1f'},
+    ];
+    Object.keys(AV).forEach(k => { if (k !== 'Unassigned') delete AV[k]; });
+    (payload.assignees || []).forEach((name, idx) => {
+      const initials = name.split(' ').map(p=>p[0]).join('').substring(0,2).toUpperCase();
+      const col = avColors[idx % avColors.length];
+      AV[name] = { cls: col.cls, label: initials, name };
+    });
+    let styleTag = document.getElementById('dynamic-av-styles');
+    if (!styleTag) { styleTag = document.createElement('style'); styleTag.id='dynamic-av-styles'; document.head.appendChild(styleTag); }
+    styleTag.textContent = (payload.assignees || []).map((name, idx) => {
+      const col = avColors[idx % avColors.length];
+      return `.av.${col.cls} { background: ${col.bg}; color: ${col.tc}; }`;
+    }).join('\n');
+
+    rebuildFilterDropdowns();
+    updateLiveDataBadge();
+  } catch (err) {
+    console.warn('Could not load live data.json, using fallback snapshot:', err);
+    ISSUES = FALLBACK_ISSUES;
+  }
+  filteredIssues = [...ISSUES];
+  applyFilters();
+}
+
+function updateLiveDataBadge() {
+  const tasks = ISSUES.filter(i => i.type !== 'Workstream');
+  const badge = document.getElementById('issue-badge');
+  const lastUpdated = document.querySelector('.last-updated');
+  if (DATA_FETCHED_AT) {
+    const d = new Date(DATA_FETCHED_AT);
+    const dateStr = d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+    const timeStr = d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', timeZone:'America/New_York'});
+    if (badge) badge.textContent = `${tasks.length} issues · Live`;
+    if (lastUpdated) lastUpdated.textContent = `Live data refreshed: ${dateStr}, ${timeStr} ET`;
+  } else if (badge) {
+    badge.textContent = `${tasks.length} issues`;
+  }
+}
+
 // ---- INIT ----
-applyFilters();
+loadLiveData();
 </script>
 </body>
 </html>
