@@ -15,7 +15,7 @@
     --border2: rgba(0,0,0,0.15);
     --text: #1a1916;
     --text2: #6b6960;
-    --text3: #9e9d96;
+    --text3: #87857d;
     --blue: #1a56a0; --blue-bg: #e8f0fb; --blue-mid: #378ADD;
     --green: #2e6b19; --green-bg: #e6f2de; --green-mid: #4a9e2a;
     --amber: #7a4a08; --amber-bg: #fef3dc; --amber-mid: #d4900a;
@@ -28,8 +28,8 @@
     --shadow-lg: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 14px; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  html { font-size: 15.5px; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 
   /* HEADER */
   .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 58px; position: sticky; top: 0; z-index: 100; }
@@ -70,6 +70,12 @@
   .clear-btn { font-size: 11px; padding: 5px 10px; border: 1px solid var(--border2); border-radius: var(--radius-sm); background: transparent; color: var(--text2); cursor: pointer; white-space: nowrap; }
   .clear-btn:hover { background: var(--surface2); }
   .filter-count { font-size: 11px; color: var(--text3); margin-left: 4px; }
+  .quick-filter-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; padding: 0 2px; }
+  .chip { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border2); background: var(--surface); color: var(--text2); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .chip:hover { background: var(--surface2); color: var(--text); }
+  .chip.active { background: var(--blue-mid); color: white; border-color: var(--blue-mid); }
+  .chip-amber.active { background: var(--amber-mid); border-color: var(--amber-mid); }
+  .chip-red.active { background: var(--red-mid); border-color: var(--red-mid); }
 
   /* METRICS */
   .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 12px; margin-bottom: 20px; }
@@ -138,7 +144,7 @@
 
   /* ISSUE TABLE */
   .issue-table-wrap { overflow-x: auto; }
-  table.issue-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.issue-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .issue-table thead tr { border-bottom: 2px solid var(--border); }
   .issue-table th { padding: 8px 10px; font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; text-align: left; white-space: nowrap; cursor: pointer; user-select: none; }
   .issue-table th:hover { color: var(--text2); }
@@ -219,9 +225,9 @@
   .modal-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
   .modal-meta-item { }
   .modal-meta-label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
-  .modal-meta-val { font-size: 13px; color: var(--text); font-weight: 500; }
+  .modal-meta-val { font-size: 14px; color: var(--text); font-weight: 500; }
   .modal-section-title { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin: 14px 0 8px; }
-  .modal-desc { font-size: 13px; color: var(--text2); line-height: 1.65; background: var(--surface2); border-radius: var(--radius-sm); padding: 12px 14px; }
+  .modal-desc { font-size: 14px; color: var(--text2); line-height: 1.7; background: var(--surface2); border-radius: var(--radius-sm); padding: 12px 14px; }
   .modal-subtasks { margin-top: 4px; }
   .modal-subtask-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); }
   .modal-subtask-row:last-child { border-bottom: none; }
@@ -292,7 +298,7 @@
     <span class="filter-label">Filters</span>
     <div class="filter-sep"></div>
     <div class="filter-group">
-      <select class="filter-select" id="f-workstream" onchange="applyFilters()">
+      <select class="filter-select" id="f-workstream" onchange="deactivateChipsAndApply()">
         <option value="">All Workstreams</option>
         <option>State/Regional EEO Initiatives</option>
         <option>Dashboard Ecosystem</option>
@@ -300,7 +306,7 @@
         <option>Data Infrastructure and Governance</option>
         <option>ATS Project Management</option>
       </select>
-      <select class="filter-select" id="f-status" onchange="applyFilters()">
+      <select class="filter-select" id="f-status" onchange="deactivateChipsAndApply()">
         <option value="">All Statuses</option>
         <option>Done</option>
         <option>In Development</option>
@@ -308,20 +314,20 @@
         <option>Prospect</option>
         <option>Strategic Workstreams</option>
       </select>
-      <select class="filter-select" id="f-type" onchange="applyFilters()">
+      <select class="filter-select" id="f-type" onchange="deactivateChipsAndApply()">
         <option value="">All Types</option>
         <option>Task</option>
         <option>Sub-task</option>
         <option>Workstream</option>
       </select>
-      <select class="filter-select" id="f-assignee" onchange="applyFilters()">
+      <select class="filter-select" id="f-assignee" onchange="deactivateChipsAndApply()">
         <option value="">All Assignees</option>
         <option>Sam Toriola</option>
         <option>Todd Oldham</option>
         <option>Jackson Sauls</option>
         <option>Unassigned</option>
       </select>
-      <select class="filter-select" id="f-priority" onchange="applyFilters()">
+      <select class="filter-select" id="f-priority" onchange="deactivateChipsAndApply()">
         <option value="">All Priorities</option>
         <option>Critical</option>
         <option>High</option>
@@ -339,6 +345,19 @@
     <button class="clear-btn" onclick="clearFilters()">Clear</button>
     <span class="filter-count" id="filter-count"></span>
     <span class="last-updated">Live data pulled from Jira: 30/Jun/26 (Eastern Time)</span>
+  </div>
+
+  <div class="quick-filter-row" id="quick-filter-row">
+    <span class="filter-label" style="margin-right:2px;">Quick views</span>
+    <button class="chip" data-chip="my-sam" onclick="toggleQuickFilter('my-sam', {assignee:'Sam Toriola'})">Sam's Items</button>
+    <button class="chip" data-chip="my-todd" onclick="toggleQuickFilter('my-todd', {assignee:'Todd Oldham'})">Todd's Items</button>
+    <button class="chip" data-chip="my-jackson" onclick="toggleQuickFilter('my-jackson', {assignee:'Jackson Sauls'})">Jackson's Items</button>
+    <span class="filter-sep"></span>
+    <button class="chip chip-amber" data-chip="overdue" onclick="toggleQuickFilter('overdue')">⚠ Overdue</button>
+    <button class="chip chip-amber" data-chip="duesoon" onclick="toggleQuickFilter('duesoon')">Due This Week</button>
+    <span class="filter-sep"></span>
+    <button class="chip" data-chip="unassigned" onclick="toggleQuickFilter('unassigned', {assignee:'Unassigned'})">Unassigned</button>
+    <button class="chip chip-red" data-chip="critical" onclick="toggleQuickFilter('critical', {priority:'Critical'})">Critical Priority</button>
   </div>
 
   <!-- METRICS -->
@@ -494,11 +513,23 @@
             <option value="Data Infrastructure and Governance">Data Infrastructure and Governance</option>
             <option value="ATS Project Management">ATS Project Management</option>
           </select>
-          <select class="filter-select" id="report-window" style="font-size:11px;">
+          <select class="filter-select" id="report-window" style="font-size:11px;" onchange="onReportWindowChange()">
             <option value="7">Activity in last 7 days</option>
             <option value="14" selected>Activity in last 14 days</option>
             <option value="30">Activity in last 30 days</option>
+            <option value="60">Activity in last 60 days</option>
+            <option value="90">Activity in last 90 days</option>
+            <option value="Q1-2026">Q1 2026 (Jan–Mar)</option>
+            <option value="Q2-2026">Q2 2026 (Apr–Jun)</option>
+            <option value="Q3-2026">Q3 2026 (Jul–Sep)</option>
+            <option value="Q4-2026">Q4 2026 (Oct–Dec)</option>
+            <option value="custom">Custom date range…</option>
           </select>
+          <span id="report-custom-dates" style="display:none;align-items:center;gap:6px;">
+            <input type="date" id="report-date-start" class="filter-select" style="font-size:11px;padding:5px 8px;">
+            <span style="font-size:11px;color:var(--text3);">to</span>
+            <input type="date" id="report-date-end" class="filter-select" style="font-size:11px;padding:5px 8px;">
+          </span>
           <button class="export-btn" onclick="generateReport()" style="gap:6px;">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
             Generate Report
@@ -704,6 +735,36 @@ function typeIcon(type) {
 }
 
 // ---- FILTERS ----
+let activeChip = null;
+
+function deactivateChipsAndApply() {
+  activeChip = null;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  applyFilters();
+}
+
+function toggleQuickFilter(name, fieldMap) {
+  const wasActive = activeChip === name;
+
+  // Reset all dropdowns and deactivate all chips first — chips represent a single quick view at a time
+  ['f-workstream','f-status','f-type','f-assignee','f-priority'].forEach(id => { document.getElementById(id).value = ''; });
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+
+  if (wasActive) {
+    activeChip = null;
+  } else {
+    activeChip = name;
+    document.querySelector(`[data-chip="${name}"]`).classList.add('active');
+    if (fieldMap) {
+      Object.entries(fieldMap).forEach(([field, val]) => {
+        const id = field === 'assignee' ? 'f-assignee' : field === 'priority' ? 'f-priority' : field === 'status' ? 'f-status' : field === 'workstream' ? 'f-workstream' : null;
+        if (id) document.getElementById(id).value = val;
+      });
+    }
+  }
+  applyFilters();
+}
+
 function applyFilters() {
   const ws = document.getElementById('f-workstream').value;
   const st = document.getElementById('f-status').value;
@@ -720,6 +781,18 @@ function applyFilters() {
     if (as && i.assignee !== as) return false;
     if (pr && i.priority !== pr) return false;
     if (q && !i.summary.toLowerCase().includes(q) && !i.key.toLowerCase().includes(q) && !i.desc.toLowerCase().includes(q)) return false;
+
+    // Date-based quick filters (Overdue / Due This Week) layer on top of dropdown filters
+    if (activeChip === 'overdue') {
+      const d = parseDue(i.due);
+      if (!d || d >= TODAY || i.status === 'Done' || i.type === 'Workstream') return false;
+    }
+    if (activeChip === 'duesoon') {
+      const d = parseDue(i.due);
+      if (!d || i.status === 'Done' || i.type === 'Workstream') return false;
+      const diff = (d - TODAY) / 86400000;
+      if (diff < 0 || diff > 7) return false;
+    }
     return true;
   });
 
@@ -733,6 +806,8 @@ function applyFilters() {
 function clearFilters() {
   ['f-workstream','f-status','f-type','f-assignee','f-priority'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('f-search').value = '';
+  activeChip = null;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   applyFilters();
 }
 
@@ -828,6 +903,8 @@ function renderWSProgress() {
 }
 
 function filterByWS(name) {
+  activeChip = null;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   document.getElementById('f-workstream').value = name;
   applyFilters();
   switchTabByName('issues');
@@ -1279,12 +1356,43 @@ function switchTabByName(name) {
 }
 
 // ---- REPORT ----
+function onReportWindowChange() {
+  const val = document.getElementById('report-window').value;
+  document.getElementById('report-custom-dates').style.display = val === 'custom' ? 'inline-flex' : 'none';
+}
+
+function resolveReportWindow() {
+  const val = document.getElementById('report-window').value;
+
+  if (val === 'custom') {
+    const startVal = document.getElementById('report-date-start').value;
+    const endVal = document.getElementById('report-date-end').value;
+    const windowStart = startVal ? new Date(startVal) : new Date(TODAY.getTime() - 14*86400000);
+    const windowEnd = endVal ? new Date(endVal) : new Date(TODAY);
+    windowEnd.setHours(23,59,59,999);
+    const label = `${formatDate(startVal || '')} – ${formatDate(endVal || '')}`;
+    return { windowStart, windowEnd, windowLabel: label };
+  }
+
+  if (val.startsWith('Q')) {
+    const [q, yearStr] = val.split('-');
+    const year = parseInt(yearStr, 10);
+    const qStartMonth = { Q1:0, Q2:3, Q3:6, Q4:9 }[q];
+    const windowStart = new Date(year, qStartMonth, 1);
+    const windowEnd = new Date(year, qStartMonth + 3, 0, 23, 59, 59, 999);
+    const qLabels = { Q1:'Q1 (Jan–Mar)', Q2:'Q2 (Apr–Jun)', Q3:'Q3 (Jul–Sep)', Q4:'Q4 (Oct–Dec)' };
+    return { windowStart, windowEnd, windowLabel: `${qLabels[q]} ${year}` };
+  }
+
+  const days = parseInt(val, 10);
+  const windowStart = new Date(TODAY.getTime() - days*86400000);
+  const windowEnd = new Date(TODAY);
+  return { windowStart, windowEnd, windowLabel: `last ${days} days` };
+}
+
 function generateReport() {
   const scopeWS = document.getElementById('report-scope').value;
-  const windowDays = parseInt(document.getElementById('report-window').value, 10);
-
-  const windowStart = new Date(TODAY);
-  windowStart.setDate(windowStart.getDate() - windowDays);
+  const { windowStart, windowEnd, windowLabel } = resolveReportWindow();
 
   let scoped = ISSUES.filter(i => i.type !== 'Workstream');
   if (scopeWS) scoped = scoped.filter(i => getWSForIssue(i) === scopeWS);
@@ -1298,7 +1406,7 @@ function generateReport() {
 
   const completedRecently = done.filter(i => {
     const u = parseDue(i.updated);
-    return u && u >= windowStart;
+    return u && u >= windowStart && u <= windowEnd;
   }).sort((a,b)=> new Date(b.updated) - new Date(a.updated));
 
   const pct = scoped.length ? Math.round(done.length/scoped.length*100) : 0;
@@ -1310,7 +1418,7 @@ function generateReport() {
   const scopeLabel = scopeWS || 'All Workstreams';
   document.getElementById('report-title').textContent = `ATS Project Register — Progress Report: ${scopeLabel}`;
   document.getElementById('report-meta').textContent =
-    `Generated ${TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})} · Covering activity in the last ${windowDays} days · Source: Jira project APR`;
+    `Generated ${TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})} · Covering ${windowLabel} · Source: Jira project APR`;
 
   // Summary cards
   document.getElementById('report-summary-cards').innerHTML = `
@@ -1349,7 +1457,7 @@ function generateReport() {
   // Completed recently
   document.getElementById('report-completed').innerHTML = completedRecently.length
     ? completedRecently.map(i => reportRow(i, formatDate(i.updated))).join('')
-    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">Nothing marked Done in the last ${windowDays} days.</div>`;
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">Nothing marked Done during ${windowLabel}.</div>`;
 
   // In progress
   document.getElementById('report-inprogress').innerHTML = inDev.length
@@ -1380,7 +1488,7 @@ function generateReport() {
     </div>`;
   }).join('');
 
-  buildPlaintextReport({scopeLabel, windowDays, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope});
+  buildPlaintextReport({scopeLabel, windowLabel, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope});
 }
 
 function reportRow(i, rightLabel, rightCls) {
@@ -1392,7 +1500,7 @@ function reportRow(i, rightLabel, rightCls) {
   </div>`;
 }
 
-function buildPlaintextReport({scopeLabel, windowDays, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope}) {
+function buildPlaintextReport({scopeLabel, windowLabel, scoped, done, inDev, planning, prospect, overdue, dueSoon, completedRecently, pct, wsScope}) {
   const lines = [];
   lines.push(`ATS PROJECT REGISTER — PROGRESS REPORT`);
   lines.push(`Scope: ${scopeLabel}`);
@@ -1409,7 +1517,7 @@ function buildPlaintextReport({scopeLabel, windowDays, scoped, done, inDev, plan
     lines.push(`- ${ws.name}: ${wsDone}/${wsTasks.length} (${wsPct}%)`);
   });
   lines.push('');
-  lines.push(`COMPLETED IN LAST ${windowDays} DAYS`);
+  lines.push(`COMPLETED DURING ${windowLabel.toUpperCase()}`);
   if (completedRecently.length) {
     completedRecently.forEach(i => lines.push(`- [${i.key}] ${i.summary} (${i.assignee}) — ${formatDate(i.updated)}`));
   } else {
