@@ -416,7 +416,7 @@
               <th onclick="sortTable('parent')" data-col="parent">Workstream / Parent <span class="sort-arrow">↕</span></th>
               <th onclick="sortTable('assignee')" data-col="assignee">Assignee <span class="sort-arrow">↕</span></th>
               <th onclick="sortTable('priority')" data-col="priority">Priority <span class="sort-arrow">↕</span></th>
-              <th onclick="sortTable('duedate')" data-col="duedate">Due <span class="sort-arrow">↕</span></th>
+              <th onclick="sortTable('due')" data-col="due">Due <span class="sort-arrow">↕</span></th>
               <th>Info</th>
             </tr>
           </thead>
@@ -680,6 +680,14 @@ const BAR_COLOR = {
   'Done':'#4a9e2a', 'In Development':'#378ADD',
   'Planning':'#d4900a', 'Prospect':'#b0ada4',
   'Strategic Workstreams':'#7F77DD',
+};
+
+// Logical sort orders (used when sorting by Status / Priority instead of plain alphabetical)
+const STATUS_SORT_ORDER = {
+  'Prospect': 0, 'Planning': 1, 'In Development': 2, 'Strategic Workstreams': 3, 'Done': 4,
+};
+const PRIORITY_SORT_ORDER = {
+  'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3,
 };
 
 let filteredIssues = [...ISSUES];
@@ -979,18 +987,56 @@ function renderPriorityChart() {
 function sortTable(col) {
   if (sortCol === col) sortDir *= -1;
   else { sortCol = col; sortDir = 1; }
-  document.querySelectorAll('.issue-table th').forEach(th => { th.classList.remove('sorted'); th.querySelector('.sort-arrow').textContent = '↕'; });
+  document.querySelectorAll('.issue-table th').forEach(th => { th.classList.remove('sorted'); const arrow = th.querySelector('.sort-arrow'); if (arrow) arrow.textContent = '↕'; });
   const th = document.querySelector(`[data-col="${col}"]`);
   if (th) { th.classList.add('sorted'); th.querySelector('.sort-arrow').textContent = sortDir===1?'↑':'↓'; }
   renderIssueTable();
 }
 
 function renderIssueTable() {
-  const sorted = [...filteredIssues].sort((a,b) => {
-    let av = a[sortCol]||'', bv = b[sortCol]||'';
-    if (sortCol==='key') { av=parseInt(av.replace('APR-')||0); bv=parseInt(bv.replace('APR-')||0); }
-    if (typeof av==='string') return av.localeCompare(bv) * sortDir;
-    return (av-bv)*sortDir;
+  const sorted = [...filteredIssues].sort((a, b) => {
+    // Key: sort numerically by the number after "APR-"
+    if (sortCol === 'key') {
+      const av = parseInt(a.key.split('-')[1], 10) || 0;
+      const bv = parseInt(b.key.split('-')[1], 10) || 0;
+      return (av - bv) * sortDir;
+    }
+
+    // Due date: real chronological sort; issues with no due date always sink to the bottom
+    if (sortCol === 'due') {
+      const ad = a.due ? new Date(a.due).getTime() : null;
+      const bd = b.due ? new Date(b.due).getTime() : null;
+      if (ad === null && bd === null) return 0;
+      if (ad === null) return 1;
+      if (bd === null) return -1;
+      return (ad - bd) * sortDir;
+    }
+
+    // Priority: Critical > High > Medium > Low, not alphabetical
+    if (sortCol === 'priority') {
+      const av = PRIORITY_SORT_ORDER[a.priority] ?? 99;
+      const bv = PRIORITY_SORT_ORDER[b.priority] ?? 99;
+      return (av - bv) * sortDir;
+    }
+
+    // Status: workflow order (Prospect -> Planning -> In Development -> Done), not alphabetical
+    if (sortCol === 'status') {
+      const av = STATUS_SORT_ORDER[a.status] ?? 99;
+      const bv = STATUS_SORT_ORDER[b.status] ?? 99;
+      return (av - bv) * sortDir;
+    }
+
+    // Workstream / Parent column displays getWSForIssue(), so sort by that same value
+    if (sortCol === 'parent') {
+      const av = getWSForIssue(a) || '';
+      const bv = getWSForIssue(b) || '';
+      return av.localeCompare(bv) * sortDir;
+    }
+
+    // Assignee, Summary, and anything else: plain string compare
+    const av = (a[sortCol] || '').toString();
+    const bv = (b[sortCol] || '').toString();
+    return av.localeCompare(bv) * sortDir;
   });
 
   const tbody = document.getElementById('issue-tbody');
