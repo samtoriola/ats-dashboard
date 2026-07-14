@@ -1123,6 +1123,24 @@
       "url": "https://stradaeducation.atlassian.net/browse/APR-77",
       "subtasks": [],
       "desc": "Bring the BigQuery environment into Strada. Identified as a technology and infrastructure priority at the 7/7/26 ATS planning retreat. Scope includes migrating the environment in-house, establishing programmatic read access (extends APR-69 API key request), completing a canonical schema file, and enabling routine data work through Claude Code instead of the manual console-and-CSV loop."
+    },
+    {
+      "key": "APR-78",
+      "type": "Task",
+      "summary": "Labor Market Analysis App",
+      "status": "In Development",
+      "parent": "Dashboard Ecosystem",
+      "parentKey": "APR-18",
+      "assignee": "Sam Toriola",
+      "priority": "Low",
+      "start": "2026-07-27",
+      "due": "2026-10-26",
+      "created": "2026-07-14",
+      "updated": "2026-07-14",
+      "reporter": "Sam Toriola",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-78",
+      "subtasks": [],
+      "desc": "Summary Create an app that can go on Analytics HUB to visualize labor market data on national and state level. Context The app is intended for Analytics HUB. Acceptance criteria Create an app. The app should visualize labor market data. The app should support national level data. The app should support state level data."
     }
   ],
   "wsConfig": [
@@ -1157,6 +1175,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-07-14T10:40:25.167338+00:00",
+  "fetchedAt": "2026-07-14T12:07:01.811258+00:00",
   "projectKey": "APR"
 }
