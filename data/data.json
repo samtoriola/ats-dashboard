@@ -695,9 +695,9 @@
       "assignee": "Sam Toriola",
       "priority": "Medium",
       "start": "2026-05-29",
-      "due": "2026-07-13",
+      "due": "2026-07-17",
       "created": "2026-06-30",
-      "updated": "2026-06-30",
+      "updated": "2026-07-15",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-54",
       "subtasks": [],
@@ -1175,6 +1175,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-07-15T14:44:23.493792+00:00",
+  "fetchedAt": "2026-07-15T16:16:03.232622+00:00",
   "projectKey": "APR"
 }
