@@ -465,7 +465,8 @@
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-36",
       "subtasks": [
-        "APR-67"
+        "APR-67",
+        "APR-79"
       ],
       "desc": "Context Analyzing academic records in relation to social profiles. Acceptance criteria Academic records must be accurately matched to corresponding social profiles. Insights gained from the analysis should be documented. The analysis should identify trends or patterns in student engagement. Visualize data"
     },
@@ -930,7 +931,7 @@
       "key": "APR-67",
       "type": "Sub-task",
       "summary": "Auto-code SOC / NAICS / CIP for Seattle Colleges",
-      "status": "In Development",
+      "status": "Done",
       "parent": "Seattle Colleges",
       "parentKey": "APR-36",
       "assignee": "Jackson Sauls",
@@ -938,7 +939,7 @@
       "start": "",
       "due": "2026-07-10",
       "created": "2026-06-30",
-      "updated": "2026-07-07",
+      "updated": "2026-07-23",
       "reporter": "Jackson Sauls",
       "url": "https://stradaeducation.atlassian.net/browse/APR-67",
       "subtasks": [],
@@ -1055,7 +1056,7 @@
     {
       "key": "APR-74",
       "type": "Task",
-      "summary": "Monthly RAPIDS data ingestion job",
+      "summary": "Ingest RAPIDS data",
       "status": "Prospect",
       "parent": "Data Infrastructure and Governance",
       "parentKey": "APR-19",
@@ -1064,7 +1065,7 @@
       "start": "",
       "due": "",
       "created": "2026-07-07",
-      "updated": "2026-07-07",
+      "updated": "2026-07-23",
       "reporter": "Jackson Sauls",
       "url": "https://stradaeducation.atlassian.net/browse/APR-74",
       "subtasks": [],
@@ -1123,6 +1124,24 @@
       "url": "https://stradaeducation.atlassian.net/browse/APR-77",
       "subtasks": [],
       "desc": "Bring the BigQuery environment into Strada. Identified as a technology and infrastructure priority at the 7/7/26 ATS planning retreat. Scope includes migrating the environment in-house, establishing programmatic read access (extends APR-69 API key request), completing a canonical schema file, and enabling routine data work through Claude Code instead of the manual console-and-CSV loop."
+    },
+    {
+      "key": "APR-79",
+      "type": "Sub-task",
+      "summary": "Core analysis questions and data model for Seattle Colleges",
+      "status": "In Development",
+      "parent": "Seattle Colleges",
+      "parentKey": "APR-36",
+      "assignee": "Jackson Sauls",
+      "priority": "Low",
+      "start": "",
+      "due": "",
+      "created": "2026-07-23",
+      "updated": "2026-07-23",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-79",
+      "subtasks": [],
+      "desc": "Define the core analysis questions and the data model for the Seattle Colleges project. Currently in progress."
     }
   ],
   "wsConfig": [
@@ -1157,6 +1176,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-07-23T20:09:06.378671+00:00",
+  "fetchedAt": "2026-07-23T21:34:03.714655+00:00",
   "projectKey": "APR"
 }
