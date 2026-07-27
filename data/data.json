@@ -49,20 +49,22 @@
     {
       "key": "APR-6",
       "type": "Task",
-      "summary": "High Demand Modeling Tool (SOI Phase 2)",
+      "summary": "High Demand Modeling Tool",
       "status": "Planning",
       "parent": "Dashboard Ecosystem",
       "parentKey": "APR-18",
-      "assignee": "Sam Toriola",
+      "assignee": "Todd Oldham",
       "priority": "Low",
       "start": "2026-06-01",
       "due": "2026-09-30",
       "created": "2026-01-26",
-      "updated": "2026-06-30",
+      "updated": "2026-07-27",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-6",
-      "subtasks": [],
-      "desc": "Context This issue addresses the development of a dashboard designed to help states rapidly create high demand/value models for analysis. The second phase will integrate Indiana's Top Jobs methodology and an Industry Recognized Credential framework. Acceptance criteria The dashboard must allow for rapid creation of high demand/value models. The tool must incorporate Indiana's Top Jobs methodology."
+      "subtasks": [
+        "APR-84"
+      ],
+      "desc": "Context This issue addresses the development of a dashboard designed to help states rapidly create high demand/value models for analysis. The tool will integrate Indiana's Top Jobs methodology and an Industry Recognized Credential framework. Acceptance criteria The dashboard must allow for rapid creation of high demand/value models. The tool must incorporate Indiana's Top Jobs methodology. The das"
     },
     {
       "key": "APR-7",
@@ -1065,7 +1067,7 @@
       "start": "",
       "due": "",
       "created": "2026-07-07",
-      "updated": "2026-07-23",
+      "updated": "2026-07-27",
       "reporter": "Jackson Sauls",
       "url": "https://stradaeducation.atlassian.net/browse/APR-74",
       "subtasks": [],
@@ -1142,6 +1144,100 @@
       "url": "https://stradaeducation.atlassian.net/browse/APR-79",
       "subtasks": [],
       "desc": "Define the core analysis questions and the data model for the Seattle Colleges project. Currently in progress."
+    },
+    {
+      "key": "APR-80",
+      "type": "Task",
+      "summary": "Apprenticeship Expansion - WBL Dashboard",
+      "status": "Planning",
+      "parent": "Dashboard Ecosystem",
+      "parentKey": "APR-18",
+      "assignee": "Jackson Sauls",
+      "priority": "Low",
+      "start": "",
+      "due": "",
+      "created": "2026-07-27",
+      "updated": "2026-07-27",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-80",
+      "subtasks": [
+        "APR-82"
+      ],
+      "desc": "Context Expand the work-based learning dashboard to cover apprenticeships. Builds on the existing internship dashboard (APR-7). Scope Use RAPIDS apprenticeship data (APR-74) and job postings data. Map apprenticeship supply and demand. Differentiate registered and non-registered apprenticeships. Other information Jackson is updating the scope of work (July 2026). RAPIDS ingestion (APR-74) is the da"
+    },
+    {
+      "key": "APR-81",
+      "type": "Task",
+      "summary": "Labor Market Trends Dashboard",
+      "status": "Planning",
+      "parent": "Dashboard Ecosystem",
+      "parentKey": "APR-18",
+      "assignee": "Sam Toriola",
+      "priority": "Low",
+      "start": "",
+      "due": "",
+      "created": "2026-07-27",
+      "updated": "2026-07-27",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-81",
+      "subtasks": [
+        "APR-83"
+      ],
+      "desc": "Context Dashboard tracking labor market trends. New addition to the Dashboard Ecosystem workstream. Other information Sam is developing the scope of work (July 2026)."
+    },
+    {
+      "key": "APR-82",
+      "type": "Sub-task",
+      "summary": "Draft scope of work - Apprenticeship Expansion",
+      "status": "Prospect",
+      "parent": "Apprenticeship Expansion - WBL Dashboard",
+      "parentKey": "APR-80",
+      "assignee": "Jackson Sauls",
+      "priority": "Low",
+      "start": "",
+      "due": "2026-08-03",
+      "created": "2026-07-27",
+      "updated": "2026-07-27",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-82",
+      "subtasks": [],
+      "desc": "Draft the scope of work for the apprenticeship expansion of the WBL dashboard. Due Monday, August 3, 2026."
+    },
+    {
+      "key": "APR-83",
+      "type": "Sub-task",
+      "summary": "Draft scope of work - Labor Market Trends Dashboard",
+      "status": "Prospect",
+      "parent": "Labor Market Trends Dashboard",
+      "parentKey": "APR-81",
+      "assignee": "Sam Toriola",
+      "priority": "Low",
+      "start": "",
+      "due": "2026-08-03",
+      "created": "2026-07-27",
+      "updated": "2026-07-27",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-83",
+      "subtasks": [],
+      "desc": "Draft the scope of work for the Labor Market Trends dashboard. Due Monday, August 3, 2026."
+    },
+    {
+      "key": "APR-84",
+      "type": "Sub-task",
+      "summary": "Draft scope of work - High Demand Modeling Tool",
+      "status": "Prospect",
+      "parent": "High Demand Modeling Tool",
+      "parentKey": "APR-6",
+      "assignee": "Todd Oldham",
+      "priority": "Low",
+      "start": "",
+      "due": "2026-08-03",
+      "created": "2026-07-27",
+      "updated": "2026-07-27",
+      "reporter": "Jackson Sauls",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-84",
+      "subtasks": [],
+      "desc": "Draft the updated scope of work for the High Demand Modeling Tool. Due Monday, August 3, 2026."
     }
   ],
   "wsConfig": [
@@ -1176,6 +1272,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-07-27T12:16:16.567852+00:00",
+  "fetchedAt": "2026-07-27T15:21:58.082022+00:00",
   "projectKey": "APR"
 }
