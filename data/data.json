@@ -603,7 +603,7 @@
       "key": "APR-45",
       "type": "Sub-task",
       "summary": "WBL Adoption from UNT",
-      "status": "In Development",
+      "status": "Done",
       "parent": "Accelerate MS (Mississippi) matched outcomes",
       "parentKey": "APR-9",
       "assignee": "Sam Toriola",
@@ -611,7 +611,7 @@
       "start": "",
       "due": "2026-07-25",
       "created": "2026-04-09",
-      "updated": "2026-07-07",
+      "updated": "2026-07-29",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-45",
       "subtasks": [],
@@ -1254,6 +1254,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-07-29T13:12:52.611652+00:00",
+  "fetchedAt": "2026-07-29T15:27:48.516947+00:00",
   "projectKey": "APR"
 }
