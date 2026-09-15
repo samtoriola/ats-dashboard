@@ -112,9 +112,9 @@
       "assignee": "Todd Oldham",
       "priority": "Low",
       "start": "2026-04-01",
-      "due": "2026-09-30",
+      "due": "2026-12-31",
       "created": "2026-01-26",
-      "updated": "2026-06-29",
+      "updated": "2026-09-15",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-9",
       "subtasks": [
@@ -646,7 +646,7 @@
       "start": "",
       "due": "",
       "created": "2026-04-09",
-      "updated": "2026-06-30",
+      "updated": "2026-09-15",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-52",
       "subtasks": [],
@@ -754,7 +754,7 @@
       "start": "",
       "due": "2026-12-31",
       "created": "2026-06-30",
-      "updated": "2026-07-07",
+      "updated": "2026-09-15",
       "reporter": "Todd Oldham",
       "url": "https://stradaeducation.atlassian.net/browse/APR-58",
       "subtasks": [],
@@ -772,7 +772,7 @@
       "start": "",
       "due": "",
       "created": "2026-06-30",
-      "updated": "2026-07-01",
+      "updated": "2026-09-15",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-59",
       "subtasks": [],
@@ -1235,6 +1235,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-09-15T08:27:30.488924+00:00",
+  "fetchedAt": "2026-09-15T13:46:33.549520+00:00",
   "projectKey": "APR"
 }
