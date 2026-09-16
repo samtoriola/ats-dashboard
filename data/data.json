@@ -1201,6 +1201,24 @@
       "url": "https://stradaeducation.atlassian.net/browse/APR-85",
       "subtasks": [],
       "desc": ""
+    },
+    {
+      "key": "APR-86",
+      "type": "Task",
+      "summary": "Vermont Labor Market and Education Alignment Analysis (VSCS)",
+      "status": "Planning",
+      "parent": "",
+      "parentKey": "",
+      "assignee": "Sam Toriola",
+      "priority": "Low",
+      "start": "2026-09-16",
+      "due": "2027-02-16",
+      "created": "2026-09-16",
+      "updated": "2026-09-16",
+      "reporter": "Sam Toriola",
+      "url": "https://stradaeducation.atlassian.net/browse/APR-86",
+      "subtasks": [],
+      "desc": "Strada Education Foundation will conduct a foundational analysis of Vermont's labor market to help the Vermont State Colleges System (VSCS) assess how its academic program portfolio aligns with state and regional workforce needs. Purpose Examine Vermont's employment structure, occupational demand, wage quality, educational requirements, and regional labor market differences, and compare findings a"
     }
   ],
   "wsConfig": [
@@ -1235,6 +1253,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-09-16T20:18:53.059378+00:00",
+  "fetchedAt": "2026-09-16T23:07:04.493953+00:00",
   "projectKey": "APR"
 }
