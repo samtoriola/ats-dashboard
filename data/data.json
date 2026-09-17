@@ -112,9 +112,9 @@
       "assignee": "Todd Oldham",
       "priority": "Low",
       "start": "2026-04-01",
-      "due": "2026-12-31",
+      "due": "2027-03-31",
       "created": "2026-01-26",
-      "updated": "2026-09-15",
+      "updated": "2026-09-17",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-9",
       "subtasks": [
@@ -1207,14 +1207,14 @@
       "type": "Task",
       "summary": "Vermont Labor Market and Education Alignment Analysis (VSCS)",
       "status": "Planning",
-      "parent": "",
-      "parentKey": "",
+      "parent": "SOEE Initiatives",
+      "parentKey": "APR-17",
       "assignee": "Sam Toriola",
       "priority": "Low",
       "start": "2026-09-16",
       "due": "2027-02-16",
       "created": "2026-09-16",
-      "updated": "2026-09-16",
+      "updated": "2026-09-17",
       "reporter": "Sam Toriola",
       "url": "https://stradaeducation.atlassian.net/browse/APR-86",
       "subtasks": [],
@@ -1253,6 +1253,6 @@
     "Sam Toriola",
     "Todd Oldham"
   ],
-  "fetchedAt": "2026-09-17T07:02:00.355034+00:00",
+  "fetchedAt": "2026-09-17T12:40:13.557587+00:00",
   "projectKey": "APR"
 }
